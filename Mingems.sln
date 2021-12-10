@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mingems.Api", "Mingems.Api\Mingems.Api.csproj", "{E43ABB67-0686-46D2-AA9C-694FD9246738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Api", "Mingems.Api\Mingems.Api.csproj", "{E43ABB67-0686-46D2-AA9C-694FD9246738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mingems.Core", "Mingems.Core\Mingems.Core.csproj", "{B114E25E-4DDA-419E-B747-D573AFC218ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Core", "Mingems.Core\Mingems.Core.csproj", "{B114E25E-4DDA-419E-B747-D573AFC218ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mingems.Infrastructure", "Mingems.Infrastructure\Mingems.Infrastructure.csproj", "{C5D77592-07DA-47F9-ACD7-C8E8F7BD6C7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Infrastructure", "Mingems.Infrastructure\Mingems.Infrastructure.csproj", "{C5D77592-07DA-47F9-ACD7-C8E8F7BD6C7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mingems.Shared", "Mingems.Shared\Mingems.Shared.csproj", "{808C6CCC-A648-4433-97CC-221C1E7EA604}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Shared", "Mingems.Shared\Mingems.Shared.csproj", "{808C6CCC-A648-4433-97CC-221C1E7EA604}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mingems.Email", "Mingems.Email\Mingems.Email.csproj", "{8E1684EB-0AEE-4916-AC31-035E59ACAF62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{808C6CCC-A648-4433-97CC-221C1E7EA604}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{808C6CCC-A648-4433-97CC-221C1E7EA604}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{808C6CCC-A648-4433-97CC-221C1E7EA604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E1684EB-0AEE-4916-AC31-035E59ACAF62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E1684EB-0AEE-4916-AC31-035E59ACAF62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E1684EB-0AEE-4916-AC31-035E59ACAF62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E1684EB-0AEE-4916-AC31-035E59ACAF62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
