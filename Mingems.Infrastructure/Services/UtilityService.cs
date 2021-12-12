@@ -30,6 +30,7 @@ namespace Mingems.Infrastructure.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                     new Claim(ClaimTypes.Email,user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.ToString()),
                     new Claim(ClaimTypes.Expired, date.Ticks.ToString())
