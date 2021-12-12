@@ -15,7 +15,7 @@ namespace Mingems.Core.Models
         public bool Verify { get; set; }
         public Role Role { get; set; }
 
-        public User Create(User user)
+        public User Create(string email, User user)
         {
             Id = user.Id;
             FirstName = user.FirstName;
@@ -25,27 +25,27 @@ namespace Mingems.Core.Models
             Role = Role.Customer;
             RecordState = RecordState.Active;
 
-            CreateAuditable(Id);
+            CreateAuditable(email);
 
             return this;
         }
 
-        public User Update(User user)
+        public User Update(string email, User user)
         {
             Id = user.Id;
             FirstName = user.FirstName;
             LastName = user.LastName;
 
-            ModifiedAuditable(Id);
+            ModifiedAuditable(email);
 
             return this;
         }
 
-        public User Delete()
+        public User Delete(string email)
         {
             RecordState = RecordState.Removed;
 
-            ModifiedAuditable(Id);
+            ModifiedAuditable(email);
 
             return this;
         }
