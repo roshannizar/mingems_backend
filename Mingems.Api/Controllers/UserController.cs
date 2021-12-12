@@ -73,10 +73,10 @@ namespace Mingems.Api.Controllers
             return new JsonResult(new { message = "Account verified successfully!" }) { StatusCode = StatusCodes.Status200OK };
         }
 
-        [HttpPut("forgotpassword/{email}")]
-        public async Task<ActionResult> ForgotPassword(string email)
+        [HttpPut("forgotpassword")]
+        public async Task<ActionResult> ForgotPassword(EmailModel emailModel)
         {
-            await userService.ForgotPasswordAsync(email);
+            await userService.ForgotPasswordAsync(emailModel.Email);
             return new JsonResult(new { message = "Reset password link has been sent to your email!" }) { StatusCode = StatusCodes.Status200OK };
         }
 
