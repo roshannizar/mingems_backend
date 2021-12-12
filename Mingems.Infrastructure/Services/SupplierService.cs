@@ -1,6 +1,7 @@
 ﻿using Mingems.Core.Models;
 using Mingems.Core.Repositories;
 using Mingems.Core.Services;
+using Mingems.Shared.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,14 +28,14 @@ namespace Mingems.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Supplier>> GetAllAsync()
+        public async Task<IEnumerable<Supplier>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await unitOfWork.SupplierRepository.GetAllAsync();
         }
 
-        public Task<Supplier> GetAsync(string Id)
+        public async Task<Supplier> GetAsync(string Id)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.SupplierRepository.GetByIdAsync(Id);
         }
 
         public Task UpdateAsync(Supplier model)

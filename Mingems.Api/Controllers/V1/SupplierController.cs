@@ -23,11 +23,24 @@ namespace Mingems.Api.Controllers.V1
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateSupplierDto supplierDto)
+        public async Task<IActionResult> Create(CreateSupplierDto supplierDto)
         {
             var user = mapper.Map<Supplier>(supplierDto);
             await supplierService.CreateAsync(user);
             return new JsonResult(new { message = "Supplier created successfully !." }) { StatusCode = StatusCodes.Status201Created };
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Supplier supplierDto) 
+        {
+            return new JsonResult(new { message = "Updated supplier successfully !." }) { StatusCode = StatusCodes.Status200OK};
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get() {
+            var suppliers = await supplierService.GetAllAsync();
+            var mappedProduct = mapper.Map<IEnumerable<CreateSupplierDto>>(suppliers);
+            return Ok(mappedProduct);
         }
 
 
