@@ -27,7 +27,7 @@ namespace Mingems.Email.Service
 
         public async Task SendVerification(string email, string token)
         {
-            var content = $"Hi, <br/> <br/> Please <a href='https://newairtel-password-portal.herokuapp.com/verify/{token}'>verify</a> your account. <br/> Thank you";
+            var content = $"Hi, <br/> <br/> Please <a href='https://mingems-portal.herokuapp.com/verify/{token}'>verify</a> your account. <br/> Thank you";
             var subject = "Mingems | Account Verification";
             var finalContent = "Thank you for using our service";
             await Send(subject, email, content, finalContent);
@@ -35,7 +35,7 @@ namespace Mingems.Email.Service
 
         public async Task SendForgotPasswordLink(string email, string token)
         {
-            var content = $"Hi, <br/> <br/> This is your reset password link <a href='https://newairtel-password-portal.herokuapp.com/forgot-password/{token}'>Click here</a> your account. <br/><br/> Thank you";
+            var content = $"Hi, <br/> <br/> This is your reset password link <a href='https://mingems-portal.herokuapp.com/forgot-password/{token}'>Click here</a> your account. <br/><br/> Thank you";
             var subject = "Mingems | Password Reset";
             var finalContent = "Thank you for using our service";
             await Send(subject, email, content, finalContent);
