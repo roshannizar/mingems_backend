@@ -46,6 +46,24 @@ namespace Mingems.Infrastructure.Services
 
         public async Task CreateAsync(User user)
         {
+            #region Validate Email
+            var trueMail = false;
+            List<string> checkEmail = new List<string>() { "outlook.com", "gmail.com", "yahoo.com", "hotmail.com" };
+
+            var index = user.Id.IndexOf("@");
+            var removed = user.Id.Substring(index + 1, user.Id.Length - index - 1);
+
+            foreach (var item in checkEmail)
+            {
+                if (item == removed)
+                {
+                    trueMail = true;
+                }
+            }
+            #endregion
+
+            if (!trueMail)
+                throw new InvalidException("Invalid Email, Please try again with a valid mail");
             await unitOfWork.UserRepository.AddAsync(user.Create(user));
             var token = utilityService.GenerateToken(user);
             await emailService.SendVerification(user.Id, token);
