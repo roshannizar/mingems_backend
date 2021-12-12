@@ -9,6 +9,7 @@ namespace Mingems.Api.Profiles
         public UserProfile()
         {
             CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, CreateUserDto>().ReverseMap();
         }
     }
 }
