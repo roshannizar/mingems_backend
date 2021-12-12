@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mingems.Core\Mingems.Core.csproj" />
+    <ProjectReference Include="..\Mingems.Email\Mingems.Email.csproj" />
   </ItemGroup>
 
 </Project>

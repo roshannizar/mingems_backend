@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mingems.Email\Mingems.Email.csproj" />
     <ProjectReference Include="..\Mingems.Infrastructure\Mingems.Infrastructure.csproj" />
   </ItemGroup>
 

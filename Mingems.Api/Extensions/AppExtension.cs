@@ -5,9 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mingems.Core.Repositories;
 using Mingems.Core.Services;
+using Mingems.Email.Service;
 using Mingems.Infrastructure.DbContexts;
 using Mingems.Infrastructure.Repositories;
 using Mingems.Infrastructure.Services;
+using Mingems.Shared.Core.Helpers;
 using System;
 
 namespace Mingems.Api.Extensions
@@ -26,6 +28,11 @@ namespace Mingems.Api.Extensions
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
+            var emailConfig = Configuration
+                .GetSection("SendGrid")
+                .Get<EmailSenderOptions>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailService, EmailService>();
         }
 
         public static void AddAppMiddleware(this IApplicationBuilder app)
