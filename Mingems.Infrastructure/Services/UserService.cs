@@ -26,8 +26,9 @@ namespace Mingems.Infrastructure.Services
         public async Task<string> Authenticate(string email, string password)
         {
             var user = await unitOfWork.UserRepository
-                .SingleOrDefaultAsync(u => u.Id == email && u.Password.Decrypt() == password);
-            if (user == null)
+                .SingleOrDefaultAsync(u => u.Id == email);
+
+            if (user == null || user.Password.Decrypt() != password)
                 throw new UserNotFoundException("Invalid user credentials");
             else if(!user.Verify)
             {
@@ -111,6 +112,7 @@ namespace Mingems.Infrastructure.Services
 
             var user = await unitOfWork.UserRepository.GetByIdAsync(email);
             unitOfWork.UserRepository.Update(user.VerifyAccount());
+            await unitOfWork.CommitAsync();
         }
     }
 }
