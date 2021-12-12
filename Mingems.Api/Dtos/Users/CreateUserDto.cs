@@ -1,7 +1,10 @@
-﻿namespace Mingems.Api.Dtos.Users
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mingems.Api.Dtos.Users
 {
     public class CreateUserDto
     {
+        [EmailAddress]
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
