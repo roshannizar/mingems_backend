@@ -1,7 +1,9 @@
-﻿using Mingems.Core.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Mingems.Core.Models;
 using Mingems.Core.Repositories;
 using Mingems.Core.Services;
 using Mingems.Email.Service;
+using Mingems.Infrastructure.Common;
 using Mingems.Shared.Core.Extensions;
 using Mingems.Shared.Core.Helpers;
 using Mingems.Shared.Infrastructure.Exceptions;
@@ -10,15 +12,13 @@ using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
-        private readonly IUnitOfWork unitOfWork;
         private readonly IUtilityService utilityService;
         private readonly IEmailService emailService;
 
-        public UserService(IUnitOfWork unitOfWork, IUtilityService utilityService, IEmailService emailService)
+        public UserService(IUnitOfWork unitOfWork, IHttpContextAccessor httpContext, IUtilityService utilityService, IEmailService emailService) : base(unitOfWork, httpContext)
         {
-            this.unitOfWork = unitOfWork;
             this.utilityService = utilityService;
             this.emailService = emailService;
         }
@@ -64,7 +64,7 @@ namespace Mingems.Infrastructure.Services
 
             if (!trueMail)
                 throw new InvalidException("Invalid Email, Please try again with a valid mail");
-            await unitOfWork.UserRepository.AddAsync(user.Create(user));
+            await unitOfWork.UserRepository.AddAsync(user.Create(email, user));
             var token = utilityService.GenerateToken(user);
             await emailService.SendVerification(user.Id, token);
             await unitOfWork.CommitAsync();
@@ -75,13 +75,15 @@ namespace Mingems.Infrastructure.Services
             var query = await unitOfWork.UserRepository.GetByIdAsync(Id);
             if (query == null)
                 throw new UserNotFoundException("No user exist or user has been removed");
-            unitOfWork.UserRepository.Update(query.Delete());
+            unitOfWork.UserRepository.Update(query.Delete(email));
             await unitOfWork.CommitAsync();
         }
 
         public async Task ForgotPasswordAsync(string email)
         {
             var user = await unitOfWork.UserRepository.GetByIdAsync(email);
+            if (user == null)
+                throw new UserNotFoundException("No user exist or user has been removed");
             var secret_token = utilityService.GenerateToken(user);
             await emailService.SendForgotPasswordLink(email, secret_token);
         }
@@ -105,6 +107,8 @@ namespace Mingems.Infrastructure.Services
         public async Task ResendVerificationAsync(string email)
         {
             var user = await unitOfWork.UserRepository.GetByIdAsync(email);
+            if (user == null)
+                throw new UserNotFoundException("No user exist or user has been removed");
             var token = utilityService.GenerateToken(user);
             await emailService.SendVerification(user.Id, token);
         }
@@ -112,7 +116,9 @@ namespace Mingems.Infrastructure.Services
         public async Task UpdateAsync(User user)
         {
             var query = await unitOfWork.UserRepository.GetByIdAsync(user.Id);
-            unitOfWork.UserRepository.Update(query.Update(user));
+            if (query == null)
+                throw new UserNotFoundException("No user exist or user has been removed");
+            unitOfWork.UserRepository.Update(query.Update(email, user));
             await unitOfWork.CommitAsync();
         }
 
@@ -120,6 +126,8 @@ namespace Mingems.Infrastructure.Services
         {
             var email = utilityService.ValidateToken(token);
             var query = await unitOfWork.UserRepository.GetByIdAsync(email);
+            if (query == null)
+                throw new UserNotFoundException("No user exist or user has been removed");
             unitOfWork.UserRepository.Update(query.UpdatePassword(model.Password));
             await unitOfWork.CommitAsync();
         }
@@ -129,6 +137,8 @@ namespace Mingems.Infrastructure.Services
             var email = utilityService.ValidateToken(token);
 
             var user = await unitOfWork.UserRepository.GetByIdAsync(email);
+            if (user == null)
+                throw new UserNotFoundException("No user exist or user has been removed");
             unitOfWork.UserRepository.Update(user.VerifyAccount());
             await unitOfWork.CommitAsync();
         }
