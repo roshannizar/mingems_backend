@@ -10,6 +10,7 @@ namespace Mingems.Core.Services
         Task<string> Authenticate(string email, string password);
         Task<User> GetMetaDataAsync(string token);
         Task UpdatePasswordAsync(PasswordModel model, string token);
+        Task ForgotPasswordAsync(string email);
         Task VerifyAccountAsync(string token);
         Task ResendVerificationAsync(string email);
     }

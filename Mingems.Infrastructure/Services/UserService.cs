@@ -1,6 +1,7 @@
 ﻿using Mingems.Core.Models;
 using Mingems.Core.Repositories;
 using Mingems.Core.Services;
+using Mingems.Email.Service;
 using Mingems.Shared.Core.Extensions;
 using Mingems.Shared.Core.Helpers;
 using Mingems.Shared.Infrastructure.Exceptions;
@@ -13,11 +14,13 @@ namespace Mingems.Infrastructure.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IUtilityService utilityService;
+        private readonly IEmailService emailService;
 
-        public UserService(IUnitOfWork unitOfWork, IUtilityService utilityService)
+        public UserService(IUnitOfWork unitOfWork, IUtilityService utilityService, IEmailService emailService)
         {
             this.unitOfWork = unitOfWork;
             this.utilityService = utilityService;
+            this.emailService = emailService;
         }
 
         public async Task<string> Authenticate(string email, string password)
@@ -29,6 +32,7 @@ namespace Mingems.Infrastructure.Services
             else if(!user.Verify)
             {
                 var genToken = utilityService.GenerateToken(user);
+                await emailService.SendVerification(email, genToken);
                 throw new AccountVerificationFailedException("Please check your email for the account verification");
             }
 
@@ -43,6 +47,7 @@ namespace Mingems.Infrastructure.Services
         {
             await unitOfWork.UserRepository.AddAsync(user.Create(user));
             var token = utilityService.GenerateToken(user);
+            await emailService.SendVerification(user.Id, token);
             await unitOfWork.CommitAsync();
         }
 
@@ -53,6 +58,13 @@ namespace Mingems.Infrastructure.Services
                 throw new UserNotFoundException("No user exist or user has been removed");
             unitOfWork.UserRepository.Update(query.Delete());
             await unitOfWork.CommitAsync();
+        }
+
+        public async Task ForgotPasswordAsync(string email)
+        {
+            var user = await unitOfWork.UserRepository.GetByIdAsync(email);
+            var secret_token = utilityService.GenerateToken(user);
+            await emailService.SendForgotPasswordLink(email, secret_token);
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -75,6 +87,7 @@ namespace Mingems.Infrastructure.Services
         {
             var user = await unitOfWork.UserRepository.GetByIdAsync(email);
             var token = utilityService.GenerateToken(user);
+            await emailService.SendVerification(user.Id, token);
         }
 
         public async Task UpdateAsync(User user)
