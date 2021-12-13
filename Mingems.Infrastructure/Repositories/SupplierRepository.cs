@@ -1,12 +1,11 @@
-﻿using Mingems.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Mingems.Core.Models;
 using Mingems.Core.Repositories;
 using Mingems.Infrastructure.Common;
 using Mingems.Infrastructure.DbContexts;
-using Mingems.Shared.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Repositories
@@ -24,14 +23,16 @@ namespace Mingems.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Supplier>> GetAllAsync()
+        public async Task<IEnumerable<Supplier>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await context.Suppliers
+               .ToListAsync();
         }
 
-        public Task<Supplier> GetByIdAsync(string id)
+        public async Task<Supplier> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return await context.Suppliers
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public void Remove(Supplier entity)
@@ -44,9 +45,10 @@ namespace Mingems.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public void Update(Supplier entity)
+        public async void Update(Supplier supplier)
         {
-            throw new NotImplementedException();
+            context.Suppliers.Update(supplier);
+            await context.SaveChangesAsync();
         }
     }
 }

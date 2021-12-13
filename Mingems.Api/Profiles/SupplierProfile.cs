@@ -13,6 +13,7 @@ namespace Mingems.Api.Profiles
         public SupplierProfile()
         {
             CreateMap<Supplier, CreateSupplierDto>().ReverseMap();
+            CreateMap<Supplier, SupplierDto>().ReverseMap();
         }
     }
 }
