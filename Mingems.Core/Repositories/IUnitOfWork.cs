@@ -6,6 +6,7 @@ namespace Mingems.Core.Repositories
     {
         IUserRepository UserRepository { get; }
         ISupplierRepository SupplierRepository { get; }
+        IInvestmentRepository InvestmentRepository { get; }
 
         Task<int> CommitAsync();
     }

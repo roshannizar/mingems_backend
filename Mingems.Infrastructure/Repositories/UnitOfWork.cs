@@ -9,6 +9,7 @@ namespace Mingems.Infrastructure.Repositories
         private readonly MingemsDbContext context;
         private IUserRepository _userRepository;
         private ISupplierRepository _supplierRepository;
+        private IInvestmentRepository _investmentRepository;
 
         public UnitOfWork(MingemsDbContext context)
         {
@@ -17,6 +18,7 @@ namespace Mingems.Infrastructure.Repositories
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(context);
         public ISupplierRepository SupplierRepository => _supplierRepository ??= new SupplierRepository(context);
+        public IInvestmentRepository InvestmentRepository => _investmentRepository ??= new InvestmentRepository(context);
 
         public async Task<int> CommitAsync()
         {
