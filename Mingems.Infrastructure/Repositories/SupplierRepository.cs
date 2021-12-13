@@ -5,6 +5,7 @@ using Mingems.Infrastructure.Common;
 using Mingems.Infrastructure.DbContexts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -20,35 +21,35 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<Supplier> Find(Expression<Func<Supplier, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return context.Suppliers.AsNoTracking().Where(predicate).AsQueryable().ToList();
         }
 
         public async Task<IEnumerable<Supplier>> GetAllAsync()
         {
-            return await context.Suppliers
+            return await context.Suppliers.AsNoTracking().AsQueryable()
                .ToListAsync();
         }
 
         public async Task<Supplier> GetByIdAsync(string id)
         {
-            return await context.Suppliers
-                .FirstOrDefaultAsync(s => s.Id == id);
+            return await context.Suppliers.AsNoTracking().AsQueryable()
+                .SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public void Remove(Supplier entity)
         {
-            throw new NotImplementedException();
+            context.Suppliers.Update(entity);
         }
 
-        public Task<Supplier> SingleOrDefaultAsync(Expression<Func<Supplier, bool>> predicate)
+        public async Task<Supplier> SingleOrDefaultAsync(Expression<Func<Supplier, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await context.Suppliers.AsNoTracking().AsQueryable()
+                .SingleOrDefaultAsync(predicate);
         }
 
-        public async void Update(Supplier supplier)
+        public void Update(Supplier supplier)
         {
             context.Suppliers.Update(supplier);
-            await context.SaveChangesAsync();
         }
     }
 }

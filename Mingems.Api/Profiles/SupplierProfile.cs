@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using Mingems.Api.Dtos.Suppliers;
 using Mingems.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Mingems.Api.Profiles
 {

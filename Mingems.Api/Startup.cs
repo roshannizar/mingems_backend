@@ -17,7 +17,7 @@ namespace Mingems.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationExtension();
+            services.AddCoreExtension();
             services.AddSecurityExtension(Configuration);
             services.AddDatabaseExtension(Configuration);
             services.AddSwaggerExtension();
@@ -31,7 +31,7 @@ namespace Mingems.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.AddApplicationMiddleware();
+            app.AddCoreMiddleware();
             app.AddSecurityMiddleware();
             app.AddAppMiddleware();
             app.AddSwaggerMiddleware();

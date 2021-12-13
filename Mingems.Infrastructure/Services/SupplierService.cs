@@ -4,7 +4,6 @@ using Mingems.Core.Repositories;
 using Mingems.Core.Services;
 using Mingems.Infrastructure.Common;
 using Mingems.Shared.Infrastructure.Exceptions;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,9 +19,13 @@ namespace Mingems.Infrastructure.Services
             await unitOfWork.CommitAsync();
         }
 
-        public Task DeleteAsync(string Id)
+        public async Task DeleteAsync(string Id)
         {
-            throw new NotImplementedException();
+            var availableSupplier = await unitOfWork.SupplierRepository.GetByIdAsync(Id);
+            if (availableSupplier == null)
+                throw new NotFoundException($"{Id} Supplier Not Found");
+            unitOfWork.SupplierRepository.Update(availableSupplier.Delete(email));
+            await unitOfWork.CommitAsync();
         }
 
         public async Task<IEnumerable<Supplier>> GetAllAsync()
@@ -40,7 +43,7 @@ namespace Mingems.Infrastructure.Services
             var availableSupplier = await unitOfWork.SupplierRepository.GetByIdAsync(supplier.Id);
             if (availableSupplier == null)
                 throw new NotFoundException($"{supplier.Id} Supplier Not Found");
-            unitOfWork.SupplierRepository.Update(supplier.Update(email, supplier));
+            unitOfWork.SupplierRepository.Update(availableSupplier.Update(email, supplier));
             await unitOfWork.CommitAsync();
         }
     }
