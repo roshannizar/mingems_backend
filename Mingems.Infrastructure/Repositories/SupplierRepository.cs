@@ -3,11 +3,9 @@ using Mingems.Core.Models;
 using Mingems.Core.Repositories;
 using Mingems.Infrastructure.Common;
 using Mingems.Infrastructure.DbContexts;
-using Mingems.Shared.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Repositories

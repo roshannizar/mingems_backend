@@ -1,25 +1,22 @@
-﻿using Mingems.Core.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Mingems.Core.Models;
 using Mingems.Core.Repositories;
 using Mingems.Core.Services;
-using Mingems.Shared.Service;
+using Mingems.Infrastructure.Common;
+using Mingems.Shared.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
 {
-    public class SupplierService : ISupplierService
+    public class SupplierService : BaseService, ISupplierService
     {
-        private readonly IUnitOfWork unitOfWork;
-        public SupplierService(IUnitOfWork unitOfWork)
-        {
-           this.unitOfWork = unitOfWork;
-        }
+        public SupplierService(IUnitOfWork unitOfWork, IHttpContextAccessor httpContext) : base(unitOfWork, httpContext) { }
 
         public async Task CreateAsync(Supplier supplier)
         {
-            await unitOfWork.SupplierRepository.AddAsync(supplier);
+            await unitOfWork.SupplierRepository.AddAsync(supplier.Create(email, supplier));
             await unitOfWork.CommitAsync();
         }
 
@@ -38,9 +35,13 @@ namespace Mingems.Infrastructure.Services
             return await unitOfWork.SupplierRepository.GetByIdAsync(Id);
         }
 
-        public Task UpdateAsync(Supplier model)
+        public async Task UpdateAsync(Supplier supplier)
         {
-            throw new NotImplementedException();
+            var availableSupplier = await unitOfWork.SupplierRepository.GetByIdAsync(supplier.Id);
+            if (availableSupplier == null)
+                throw new NotFoundException($"{supplier.Id} Supplier Not Found");
+            unitOfWork.SupplierRepository.Update(supplier.Update(email, supplier));
+            await unitOfWork.CommitAsync();
         }
     }
 }
