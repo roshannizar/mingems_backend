@@ -47,7 +47,7 @@ namespace Mingems.Infrastructure.Repositories
 
         public void Update(User entity)
         {
-            context.Update(entity);
+            context.Users.Update(entity);
         }
     }
 }

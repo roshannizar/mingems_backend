@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mingems.Api.Dtos.Suppliers;
+using Mingems.Api.Middleware;
 using Mingems.Core.Models;
 using Mingems.Core.Services;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Mingems.Api.Controllers.V1
 {
-    [Route("api/supplier")]
+    [Route("api/v1/suppliers")]
     [ApiController]
     public class SupplierController : BaseApiController
     {
@@ -20,21 +21,22 @@ namespace Mingems.Api.Controllers.V1
             this.supplierService = supplierService;
         }
 
-        
+        [Authorize(Role = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateSupplier(CreateSupplierDto supplierDto)
         {
             var supplier = mapper.Map<Supplier>(supplierDto);
             await supplierService.CreateAsync(supplier);
-            return new JsonResult(new { message = "Supplier created successfully !." }) { StatusCode = StatusCodes.Status201Created };
+            return new JsonResult(new { message = "Supplier created successfully!" }) { StatusCode = StatusCodes.Status201Created };
         }
 
+        [Authorize(Role = "Admin")]
         [HttpPut]
         public async Task<ActionResult> UpdateSupplier(SupplierDto supplierDto)
         {
             var updatedsupplier = mapper.Map<Supplier>(supplierDto);
             await supplierService.UpdateAsync(updatedsupplier);
-            return new JsonResult(new { message = "Supplier updated successfully" }) { StatusCode = StatusCodes.Status200OK };
+            return new JsonResult(new { message = "Supplier updated successfully!" }) { StatusCode = StatusCodes.Status200OK };
         }
 
 
@@ -52,9 +54,11 @@ namespace Mingems.Api.Controllers.V1
             return Ok(mappedSupplier);
         }
 
+        [Authorize(Role = "Admin")]
         [HttpDelete]
-        public async Task<ActionResult> DeleteSupplier() {
-            return Ok();
+        public async Task<ActionResult> DeleteSupplier(string Id) {
+            await supplierService.DeleteAsync(Id);
+            return new JsonResult(new { message = "Supplier deleted successfully!" }) { StatusCode = StatusCodes.Status200OK };
         }
     }
 }

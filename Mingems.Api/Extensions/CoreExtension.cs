@@ -4,9 +4,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace Mingems.Api.Extensions
 {
-    public static class ApplicationExtension
+    public static class CoreExtension
     {
-        public static void AddApplicationExtension(this IServiceCollection services)
+        public static void AddCoreExtension(this IServiceCollection services)
         {
             services.AddCors();
 
@@ -17,7 +17,7 @@ namespace Mingems.Api.Extensions
             });
         }
 
-        public static void AddApplicationMiddleware(this IApplicationBuilder app)
+        public static void AddCoreMiddleware(this IApplicationBuilder app)
         {
             app.UseCors(x => x
                 .AllowAnyOrigin()
