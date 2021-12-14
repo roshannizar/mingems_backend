@@ -27,7 +27,7 @@ namespace Mingems.Infrastructure.Repositories
 
         public async Task<IEnumerable<Investment>> GetAllAsync()
         {
-            return await context.Investments.AsNoTracking().AsQueryable().ToListAsync();
+            return await context.Investments.AsNoTracking().AsQueryable().OrderByDescending(o => o.CreationDate).ToListAsync();
         }
 
         public async Task<Investment> GetByIdAsync(string id)
