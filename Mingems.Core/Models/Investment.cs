@@ -34,6 +34,7 @@ namespace Mingems.Core.Models
             RecordState = RecordState.Active;
 
             CreateAuditable(user);
+            ModifiedAuditable(user);
 
             return this;
         }
