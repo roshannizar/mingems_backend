@@ -35,7 +35,7 @@ namespace Mingems.Infrastructure.Services
 
         public async Task<Investment> GetAsync(string Id)
         {
-            return await unitOfWork.InvestmentRepository.SingleOrDefaultAsync(i => i.RefId == Id);
+            return await unitOfWork.InvestmentRepository.GetByIdAsync(Id);
         }
 
         public async Task UpdateAsync(Investment model)
