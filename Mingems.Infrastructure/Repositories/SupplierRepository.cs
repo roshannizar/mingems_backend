@@ -21,12 +21,12 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<Supplier> Find(Expression<Func<Supplier, bool>> predicate)
         {
-            return context.Suppliers.AsNoTracking().Where(predicate).AsQueryable().ToList();
+            return context.Suppliers.AsNoTracking().Where(predicate).AsQueryable().OrderByDescending(s => s.ModificationDate).ToList();
         }
 
         public async Task<IEnumerable<Supplier>> GetAllAsync()
         {
-            return await context.Suppliers.AsNoTracking().AsQueryable()
+            return await context.Suppliers.AsNoTracking().AsQueryable().OrderByDescending(s => s.ModificationDate)
                .ToListAsync();
         }
 

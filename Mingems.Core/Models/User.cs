@@ -26,6 +26,7 @@ namespace Mingems.Core.Models
             RecordState = RecordState.Active;
 
             CreateAuditable(email);
+            ModifiedAuditable(email);
 
             return this;
         }
