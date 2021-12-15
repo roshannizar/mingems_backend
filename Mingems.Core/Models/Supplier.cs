@@ -38,7 +38,7 @@ namespace Mingems.Core.Models
 
         public Supplier Delete(string user)
         {
-            RecordState = RecordState.Active;
+            RecordState = RecordState.Removed;
 
             ModifiedAuditable(user);
 
