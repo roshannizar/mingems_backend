@@ -23,7 +23,7 @@ namespace Mingems.Infrastructure.Services
         {
             var investment = await unitOfWork.InvestmentRepository.GetByIdAsync(Id);
             if (investment == null)
-                throw new NotFoundException("Supplier not found or already removed");
+                throw new NotFoundException("Investment not found or already removed");
             unitOfWork.InvestmentRepository.Update(investment.Delete(email));
             await unitOfWork.CommitAsync();
         }
@@ -42,7 +42,7 @@ namespace Mingems.Infrastructure.Services
         {
             var investment = await unitOfWork.InvestmentRepository.GetByIdAsync(model.Id);
             if (investment == null)
-                throw new NotFoundException("Supplier not found or already removed");
+                throw new NotFoundException("Investment not found or already removed");
             unitOfWork.InvestmentRepository.Update(investment.Update(email, model));
             await unitOfWork.CommitAsync();
         }
