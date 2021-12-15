@@ -59,7 +59,7 @@ namespace Mingems.Core.Models
 
         public Investment Delete(string user)
         {
-            RecordState = RecordState.Active;
+            RecordState = RecordState.Removed;
 
             ModifiedAuditable(user);
 
