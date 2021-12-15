@@ -1,17 +1,20 @@
 ﻿using Mingems.Shared.Core.Models;
 using Mingems.Shared.Core.Enums;
+using System;
 
 namespace Mingems.Core.Models
 {
     public class Supplier : AuditableEntity
     {
+        public string Email { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
         public string ContactNo { get; set; }
 
         public Supplier Create(string user, Supplier supplier)
         {
-            Id = supplier.Id;
+            Id = Guid.NewGuid().ToString();
+            Email = supplier.Email;
             Name = supplier.Name;
             City = supplier.City;
             ContactNo = supplier.ContactNo;
@@ -26,6 +29,7 @@ namespace Mingems.Core.Models
         public Supplier Update(string user, Supplier supplier)
         {
             Id = supplier.Id;
+            Email = supplier.Email;
             Name = supplier.Name;
             City = supplier.City;
             ContactNo = supplier.ContactNo;
