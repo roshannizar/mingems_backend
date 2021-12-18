@@ -1,16 +1,14 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Mingems.Api.Dtos.Suppliers
 {
-    public class SupplierDto
+    public class UpdateSupplierDto
     {
         public string Id { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
         public string ContactNo { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
     }
 }

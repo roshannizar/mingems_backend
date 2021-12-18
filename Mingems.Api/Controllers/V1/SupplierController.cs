@@ -32,7 +32,7 @@ namespace Mingems.Api.Controllers.V1
 
         [Authorize(Role = "Admin")]
         [HttpPut]
-        public async Task<ActionResult> UpdateSupplier(SupplierDto supplierDto)
+        public async Task<ActionResult> UpdateSupplier(UpdateSupplierDto supplierDto)
         {
             var updatedsupplier = mapper.Map<Supplier>(supplierDto);
             await supplierService.UpdateAsync(updatedsupplier);
