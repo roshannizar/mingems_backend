@@ -24,7 +24,7 @@ namespace Mingems.Infrastructure.Services
             var availableSupplier = await unitOfWork.SupplierRepository.GetByIdAsync(Id);
             if (availableSupplier == null)
                 throw new NotFoundException($"{Id} Supplier Not Found");
-            unitOfWork.SupplierRepository.Update(availableSupplier.Delete(email));
+            unitOfWork.SupplierRepository.Remove(availableSupplier.Delete(email));
             await unitOfWork.CommitAsync();
         }
 
