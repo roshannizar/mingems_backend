@@ -27,6 +27,7 @@ namespace Mingems.Api.Extensions
             services.AddTransient<IUtilityService, UtilityService>();
             services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IInvestmentService, InvestmentService>();
+            services.AddTransient<ICustomerService, CustomerService>();
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 

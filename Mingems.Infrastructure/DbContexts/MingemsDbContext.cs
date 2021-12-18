@@ -11,12 +11,14 @@ namespace Mingems.Infrastructure.DbContexts
         public DbSet<User> Users { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Investment> Investments { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<User>().HasQueryFilter(u => u.RecordState == RecordState.Active);
             builder.Entity<Supplier>().HasQueryFilter(s => s.RecordState == RecordState.Active);
             builder.Entity<Investment>().HasQueryFilter(i => i.RecordState == RecordState.Active);
+            builder.Entity<Customer>().HasQueryFilter(c => c.RecordState == RecordState.Active);
         }
     }
 }

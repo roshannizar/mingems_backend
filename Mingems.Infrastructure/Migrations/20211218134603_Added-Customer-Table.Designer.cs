@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mingems.Infrastructure.DbContexts;
 
 namespace Mingems.Infrastructure.Migrations
 {
     [DbContext(typeof(MingemsDbContext))]
-    partial class MingemsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211218134603_Added-Customer-Table")]
+    partial class AddedCustomerTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
