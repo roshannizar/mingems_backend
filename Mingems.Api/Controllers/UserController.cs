@@ -59,7 +59,7 @@ namespace Mingems.Api.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<ActionResult<UserDto>> Update(UserDto userDto)
+        public async Task<ActionResult<UserDto>> Update(UpdateUserDto userDto)
         {
             var user = mapper.Map<User>(userDto);
             await userService.UpdateAsync(user);
