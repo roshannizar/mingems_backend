@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Mingems.Api.Dtos.Customer;
+using Mingems.Api.Dtos.Customers;
 using Mingems.Api.Middleware;
 using Mingems.Core.Models;
 using Mingems.Core.Services;

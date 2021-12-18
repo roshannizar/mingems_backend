@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mingems.Infrastructure.DbContexts;
 
 namespace Mingems.Infrastructure.Migrations
 {
     [DbContext(typeof(MingemsDbContext))]
-    partial class MingemsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211218190422_Added-PurchaseId-To-Inventory")]
+    partial class AddedPurchaseIdToInventory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,12 +117,6 @@ namespace Mingems.Infrastructure.Migrations
                     b.Property<decimal>("ExportCost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("InvenstorId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvestorId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("LastPriceCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -139,6 +135,9 @@ namespace Mingems.Infrastructure.Migrations
                     b.Property<string>("PriceCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PurchaseId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -156,7 +155,7 @@ namespace Mingems.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvestorId");
+                    b.HasIndex("PurchaseId");
 
                     b.ToTable("Inventories");
                 });
@@ -352,9 +351,9 @@ namespace Mingems.Infrastructure.Migrations
 
             modelBuilder.Entity("Mingems.Core.Models.Inventory", b =>
                 {
-                    b.HasOne("Mingems.Core.Models.Investment", "Investment")
+                    b.HasOne("Mingems.Core.Models.Purchase", "Purchase")
                         .WithMany()
-                        .HasForeignKey("InvestorId");
+                        .HasForeignKey("PurchaseId");
                 });
 
             modelBuilder.Entity("Mingems.Core.Models.Purchase", b =>

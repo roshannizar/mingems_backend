@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Mingems.Api.Controllers
 {
-    //[ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     [Route("api/user")]
     public class UserController : BaseApiController

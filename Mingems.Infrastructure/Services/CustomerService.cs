@@ -24,7 +24,7 @@ namespace Mingems.Infrastructure.Services
             var customer = await unitOfWork.CustomerRepository.GetByIdAsync(Id);
             if (customer == null)
                 throw new NotFoundException("Customer not found or already removed");
-            unitOfWork.CustomerRepository.Update(customer.Delete(email));
+            unitOfWork.CustomerRepository.Remove(customer.Delete(email));
             await unitOfWork.CommitAsync();
         }
 

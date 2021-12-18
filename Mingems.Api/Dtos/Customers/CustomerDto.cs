@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mingems.Api.Dtos.Customer
+namespace Mingems.Api.Dtos.Customers
 {
     public class CustomerDto
     {

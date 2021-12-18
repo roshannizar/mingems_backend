@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mingems.Infrastructure.DbContexts;
 
 namespace Mingems.Infrastructure.Migrations
 {
     [DbContext(typeof(MingemsDbContext))]
-    partial class MingemsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211218142709_Added-Purchase-And-Inventory")]
+    partial class AddedPurchaseAndInventory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,12 +117,6 @@ namespace Mingems.Infrastructure.Migrations
                     b.Property<decimal>("ExportCost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("InvenstorId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvestorId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("LastPriceCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -155,8 +151,6 @@ namespace Mingems.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InvestorId");
 
                     b.ToTable("Inventories");
                 });
@@ -348,13 +342,6 @@ namespace Mingems.Infrastructure.Migrations
                     b.HasOne("Mingems.Core.Models.Inventory", "Inventory")
                         .WithMany("ImageLines")
                         .HasForeignKey("InventoryId");
-                });
-
-            modelBuilder.Entity("Mingems.Core.Models.Inventory", b =>
-                {
-                    b.HasOne("Mingems.Core.Models.Investment", "Investment")
-                        .WithMany()
-                        .HasForeignKey("InvestorId");
                 });
 
             modelBuilder.Entity("Mingems.Core.Models.Purchase", b =>

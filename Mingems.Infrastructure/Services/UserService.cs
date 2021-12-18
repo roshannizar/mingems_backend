@@ -75,7 +75,7 @@ namespace Mingems.Infrastructure.Services
             var query = await unitOfWork.UserRepository.GetByIdAsync(Id);
             if (query == null)
                 throw new UserNotFoundException("No user exist or user has been removed");
-            unitOfWork.UserRepository.Update(query.Delete(email));
+            unitOfWork.UserRepository.Remove(query.Delete(email));
             await unitOfWork.CommitAsync();
         }
 

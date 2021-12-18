@@ -12,6 +12,8 @@ namespace Mingems.Infrastructure.DbContexts
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Investment> Investments { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -19,6 +21,8 @@ namespace Mingems.Infrastructure.DbContexts
             builder.Entity<Supplier>().HasQueryFilter(s => s.RecordState == RecordState.Active);
             builder.Entity<Investment>().HasQueryFilter(i => i.RecordState == RecordState.Active);
             builder.Entity<Customer>().HasQueryFilter(c => c.RecordState == RecordState.Active);
+            builder.Entity<Purchase>().HasQueryFilter(p => p.RecordState == RecordState.Active);
+            builder.Entity<Inventory>().HasQueryFilter(i => i.RecordState == RecordState.Active);
         }
     }
 }

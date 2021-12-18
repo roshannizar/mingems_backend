@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Mingems.Api.Dtos.Customer;
+using Mingems.Api.Dtos.Customers;
 using Mingems.Core.Models;
 
 namespace Mingems.Api.Profiles
