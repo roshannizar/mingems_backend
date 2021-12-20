@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Mingems.Api.Dtos.Inventories
 {
     public class CreateInventoryDto
     {
         public List<CreateImageLinesDto> ImageLines { get; set; }
+        [Required]
         public string InvestorId { get; set; }
         public string Barcode { get; set; }
         public string Name { get; set; }

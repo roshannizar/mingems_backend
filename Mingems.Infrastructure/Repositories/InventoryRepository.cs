@@ -37,15 +37,7 @@ namespace Mingems.Infrastructure.Repositories
 
         public void Remove(Inventory entity)
         {
-            context.Entry(entity).State = EntityState.Modified;
-
-            foreach (var image in entity.ImageLines)
-            {
-                if (image.CreationDate.Date == DateTime.UtcNow.Date)
-                    context.Entry(image).State = EntityState.Added;
-                else
-                    context.Entry(image).State = EntityState.Modified;
-            }
+            context.Inventories.Update(entity);
         }
 
         public async Task<Inventory> SingleOrDefaultAsync(Expression<Func<Inventory, bool>> predicate)
