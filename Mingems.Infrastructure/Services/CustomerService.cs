@@ -15,6 +15,24 @@ namespace Mingems.Infrastructure.Services
 
         public async Task CreateAsync(Customer model)
         {
+            #region Validate Email
+            var trueMail = false;
+            List<string> checkEmail = new List<string>() { "outlook.com", "gmail.com", "yahoo.com", "hotmail.com" };
+
+            var index = model.Email.IndexOf("@");
+            var removed = model.Email.Substring(index + 1, model.Email.Length - index - 1);
+
+            foreach (var item in checkEmail)
+            {
+                if (item == removed)
+                {
+                    trueMail = true;
+                }
+            }
+            #endregion
+
+            if (!trueMail)
+                throw new InvalidException("Invalid Email, Please try again with a valid mail");
             await unitOfWork.CustomerRepository.AddAsync(model.Create(email, model));
             await unitOfWork.CommitAsync();
         }
