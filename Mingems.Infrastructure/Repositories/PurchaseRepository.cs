@@ -22,17 +22,34 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<Purchase> Find(Expression<Func<Purchase, bool>> predicate)
         {
-            return context.Purchases.AsNoTracking().AsQueryable().OrderByDescending(p => p.TransactionDate).Where(predicate).ToList();
+            return context.Purchases
+                .AsNoTracking()
+                .Include(p => p.Investment)
+                .Include(p => p.Supplier)
+                .AsQueryable()
+                .OrderByDescending(p => p.TransactionDate)
+                .Where(predicate).ToList();
         }
 
         public async Task<IEnumerable<Purchase>> GetAllAsync()
         {
-            return await context.Purchases.AsNoTracking().AsQueryable().OrderByDescending(p => p.TransactionDate).ToListAsync();
+            return await context.Purchases
+                .AsNoTracking()
+                .Include(p => p.Investment)
+                .Include(p => p.Supplier)
+                .AsQueryable()
+                .OrderByDescending(p => p.TransactionDate)
+                .ToListAsync();
         }
 
         public async Task<Purchase> GetByIdAsync(string id)
         {
-            return await context.Purchases.AsNoTracking().AsQueryable().SingleOrDefaultAsync(p => p.Id == id);
+            return await context.Purchases
+                .AsNoTracking()
+                .Include(p => p.Investment)
+                .Include(p => p.Supplier)
+                .AsQueryable()
+                .SingleOrDefaultAsync(p => p.Id == id);
         }
 
         public void Remove(Purchase entity)
@@ -42,7 +59,12 @@ namespace Mingems.Infrastructure.Repositories
 
         public async Task<Purchase> SingleOrDefaultAsync(Expression<Func<Purchase, bool>> predicate)
         {
-            return await context.Purchases.AsNoTracking().AsQueryable().SingleOrDefaultAsync(predicate);
+            return await context.Purchases
+                .AsNoTracking()
+                .Include(p => p.Investment)
+                .Include(p => p.Supplier)
+                .AsQueryable()
+                .SingleOrDefaultAsync(predicate);
         }
 
         public void Update(Purchase entity)
