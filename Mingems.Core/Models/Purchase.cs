@@ -26,7 +26,7 @@ namespace Mingems.Core.Models
             Description = purchase.Description;
             InvestorId = purchase.InvestorId;
             UnitPrice = purchase.UnitPrice;
-            SupplierId = purchase.Id;
+            SupplierId = purchase.SupplierId;
             ExportCost = purchase.ExportCost;
             TransactionDate = DateTime.UtcNow;
 
