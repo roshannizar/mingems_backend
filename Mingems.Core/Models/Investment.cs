@@ -30,7 +30,7 @@ namespace Mingems.Core.Models
             TransactionDate = DateTime.UtcNow;
             ContactNo = investment.ContactNo;
             Amount = investment.Amount;
-            RemainingAmount = 0;
+            RemainingAmount = Amount;
             RecordState = RecordState.Active;
 
             CreateAuditable(user);
@@ -63,6 +63,30 @@ namespace Mingems.Core.Models
 
             ModifiedAuditable(user);
 
+            return this;
+        }
+
+        public Investment AddRemainingAmount(string user, decimal amount)
+        {
+            RemainingAmount = RemainingAmount - amount;
+
+            ModifiedAuditable(user);
+            return this;
+        }
+
+        public Investment UpdateRemainingAmount(string user, decimal amount, decimal previousAmount)
+        {
+            RemainingAmount = RemainingAmount - (previousAmount - amount);
+
+            ModifiedAuditable(user);
+            return this;
+        }
+
+        public Investment DeletedRemainingAmount(string user, decimal amount)
+        {
+            RemainingAmount = RemainingAmount + amount;
+
+            ModifiedAuditable(user);
             return this;
         }
     }
