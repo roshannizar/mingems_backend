@@ -19,6 +19,11 @@ namespace Mingems.Core.Models
         public virtual Supplier Supplier { get; set; }
         public decimal ExportCost { get; set; }
 
+        #region Not Mapped Fields
+        [NotMapped]
+        public string PreviousInvestorId { get; set; }
+        #endregion
+
         public Purchase Create(string user, Purchase purchase)
         {
             Id = Guid.NewGuid().ToString();

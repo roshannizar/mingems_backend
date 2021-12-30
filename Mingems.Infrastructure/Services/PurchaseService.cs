@@ -47,9 +47,21 @@ namespace Mingems.Infrastructure.Services
             var purchase = await unitOfWork.PurchaseRepository.GetByIdAsync(model.Id);
             if (purchase == null)
                 throw new NotFoundException("Purchase not found or already removed");
+
+            if (model.PreviousInvestorId != null && model.PreviousInvestorId != model.InvestorId)
+            {
+                var newInvestment = await unitOfWork.InvestmentRepository.GetByIdAsync(model.InvestorId);
+                unitOfWork.InvestmentRepository.Update(newInvestment.AddRemainingAmount(email, model.UnitPrice));
+
+                var previousInvestor = await unitOfWork.InvestmentRepository.GetByIdAsync(model.PreviousInvestorId);
+                unitOfWork.InvestmentRepository.Update(previousInvestor.DeletedRemainingAmount(email, purchase.UnitPrice));
+            } else
+            {
+                var investment = await unitOfWork.InvestmentRepository.GetByIdAsync(model.InvestorId);
+                unitOfWork.InvestmentRepository.Update(investment.UpdateRemainingAmount(email, model.UnitPrice, purchase.UnitPrice));
+            }
+
             unitOfWork.PurchaseRepository.Update(purchase.Update(email, model));
-            var investment = await unitOfWork.InvestmentRepository.GetByIdAsync(model.InvestorId);
-            unitOfWork.InvestmentRepository.Update(investment.UpdateRemainingAmount(email, model.UnitPrice, purchase.UnitPrice));
             await unitOfWork.CommitAsync();
         }
     }
