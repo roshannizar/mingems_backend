@@ -68,7 +68,10 @@ namespace Mingems.Core.Models
 
         public Investment AddRemainingAmount(string user, decimal amount)
         {
-            RemainingAmount = RemainingAmount - amount;
+            if (amount <= RemainingAmount)
+                RemainingAmount = RemainingAmount - amount;
+            else
+                throw new InvalidOperationException("Investor amount balance exceeded");
 
             ModifiedAuditable(user);
             return this;
@@ -76,7 +79,10 @@ namespace Mingems.Core.Models
 
         public Investment UpdateRemainingAmount(string user, decimal amount, decimal previousAmount)
         {
-            RemainingAmount = RemainingAmount - (previousAmount - amount);
+            if (amount <= RemainingAmount)
+                RemainingAmount = RemainingAmount - (previousAmount - amount);
+            else
+                throw new InvalidOperationException("Investor amount balance exceeded");
 
             ModifiedAuditable(user);
             return this;
