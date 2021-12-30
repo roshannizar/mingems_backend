@@ -61,6 +61,8 @@ namespace Mingems.Core.Models
         
         public Purchase Delete(string user)
         {
+            Investment = null;
+            Supplier = null;
             RecordState = RecordState.Removed;
 
             ModifiedAuditable(user);
