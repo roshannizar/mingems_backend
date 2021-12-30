@@ -80,7 +80,7 @@ namespace Mingems.Core.Models
         public Investment UpdateRemainingAmount(string user, decimal amount, decimal previousAmount)
         {
             if (amount <= RemainingAmount)
-                RemainingAmount = RemainingAmount - (previousAmount - amount);
+                RemainingAmount = RemainingAmount - (amount - previousAmount);
             else
                 throw new InvalidOperationException("Investor amount balance exceeded");
 
