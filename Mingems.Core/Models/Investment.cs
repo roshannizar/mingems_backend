@@ -49,7 +49,6 @@ namespace Mingems.Core.Models
             TransactionDate = investment.TransactionDate;
             ContactNo = investment.ContactNo;
             Amount = investment.Amount;
-            RemainingAmount = investment.RemainingAmount;
             RecordState = RecordState.Active;
 
             ModifiedAuditable(user);
