@@ -55,7 +55,7 @@ namespace Mingems.Infrastructure.Services
 
                 var previousInvestor = await unitOfWork.InvestmentRepository.GetByIdAsync(model.PreviousInvestorId);
                 unitOfWork.InvestmentRepository.Update(previousInvestor.DeletedRemainingAmount(email, purchase.UnitPrice));
-            } else
+            } else if(model.InvestorId != null)
             {
                 var investment = await unitOfWork.InvestmentRepository.GetByIdAsync(model.InvestorId);
                 unitOfWork.InvestmentRepository.Update(investment.UpdateRemainingAmount(email, model.UnitPrice, purchase.UnitPrice));
