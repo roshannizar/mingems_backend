@@ -11,5 +11,6 @@ namespace Mingems.Api.Dtos.Users
         public string IpAddress { get; set; }
         public DateTime LastLoggedDate { get; set; }
         public Role Role { get; set; }
+        public bool Verify { get; set; }
     }
 }
