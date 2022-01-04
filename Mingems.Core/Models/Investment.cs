@@ -48,6 +48,7 @@ namespace Mingems.Core.Models
             Email = investment.Email;
             TransactionDate = investment.TransactionDate;
             ContactNo = investment.ContactNo;
+            RemainingAmount = RemainingAmount + (investment.Amount - Amount);
             Amount = investment.Amount;
             RecordState = RecordState.Active;
 
