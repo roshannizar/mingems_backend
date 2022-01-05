@@ -28,7 +28,7 @@ namespace Mingems.Infrastructure.Services
                 throw new NotFoundException("Purchase not found or already removed");
             unitOfWork.PurchaseRepository.Remove(purchase.Delete(email));
             var investment = await unitOfWork.InvestmentRepository.GetByIdAsync(purchase.InvestorId);
-            if (purchase.Investment != null)
+            if (investment != null)
                 unitOfWork.InvestmentRepository.Update(investment.DeletedRemainingAmount(email, purchase.UnitPrice));
             await unitOfWork.CommitAsync();
         }
