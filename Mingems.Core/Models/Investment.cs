@@ -84,9 +84,9 @@ namespace Mingems.Core.Models
             else
             {
                 var tempAmount = amount - previousAmount;
-                if(tempAmount <= 0)
+                if(tempAmount >= 0)
                 {
-                    RemainingAmount = RemainingAmount - (amount - previousAmount);
+                    RemainingAmount = RemainingAmount - tempAmount;
                 }
                 else 
                     throw new InvalidOperationException("Investor amount balance exceeded");
