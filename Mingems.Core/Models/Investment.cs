@@ -84,7 +84,7 @@ namespace Mingems.Core.Models
             else
             {
                 var tempAmount = amount - previousAmount;
-                if(tempAmount >= 0)
+                if(tempAmount >= 0 && RemainingAmount >= 0)
                 {
                     RemainingAmount = RemainingAmount - tempAmount;
                 }
