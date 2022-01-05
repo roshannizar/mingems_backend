@@ -12,7 +12,7 @@ namespace Mingems.Api.Extensions
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Mingems Api", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Mingems Api", Version = "v1.42" });
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
