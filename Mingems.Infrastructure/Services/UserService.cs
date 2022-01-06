@@ -48,7 +48,7 @@ namespace Mingems.Infrastructure.Services
         {
             #region Validate Email
             var trueMail = false;
-            List<string> checkEmail = new List<string>() { "outlook.com", "gmail.com", "yahoo.com", "hotmail.com" };
+            List<string> checkEmail = new List<string>() { "outlook.com", "gmail.com", "yahoo.com", "hotmail.com", "mingems.co.uk" };
 
             var index = user.Id.IndexOf("@");
             var removed = user.Id.Substring(index + 1, user.Id.Length - index - 1);
