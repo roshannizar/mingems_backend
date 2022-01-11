@@ -21,11 +21,15 @@ namespace Mingems.Report.Services
             var inventoryCount = await context.SPDashboard.FromSqlRaw("exec InventoriesCount").ToListAsync();
             var customerCount = await context.SPDashboard.FromSqlRaw("exec CustomerCount").ToListAsync();
 
+            var topInvestors = await context.TopInvestors.FromSqlRaw("exec TopInvestors").ToListAsync(); 
+
+
             return new DashboardModel()
             {
-                TotalCustomers = customerCount[0].count,
-                TotalInvestor = investorsCount[0].count,
-                TotalStocks = inventoryCount[0].count
+                TotalCustomers = customerCount[0].Count,
+                TotalInvestor = investorsCount.Count,
+                TotalStocks = inventoryCount[0].Count,
+                Investors = topInvestors
             };
         }
     }

@@ -1,7 +1,9 @@
-﻿namespace Mingems.Core.SPModels
+﻿using System.Collections.Generic;
+
+namespace Mingems.Core.SPModels
 {
     public class DashboardResponseModel
     {
-        public int count { get; set; }
+        public int Count { get; set; }
     }
 }

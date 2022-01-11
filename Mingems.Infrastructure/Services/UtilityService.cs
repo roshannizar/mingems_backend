@@ -48,7 +48,8 @@ namespace Mingems.Infrastructure.Services
             var validatedToken = handler.ReadJwtToken(token);
 
             var email = validatedToken.Claims.FirstOrDefault(c => c.Type == "email").Value;
-            var expires = validatedToken.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/expired").Value;
+            var expires = validatedToken.Claims.
+                FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/expired").Value;
             DateTime expireDate = new DateTime(long.Parse(expires));
             int result = DateTime.Compare(DateTime.Now, expireDate);
             if (result > -1)
