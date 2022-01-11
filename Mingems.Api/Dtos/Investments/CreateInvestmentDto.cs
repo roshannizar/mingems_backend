@@ -5,6 +5,7 @@ namespace Mingems.Api.Dtos.Investments
 {
     public class CreateInvestmentDto
     {
+        public string RefId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [EmailAddress]

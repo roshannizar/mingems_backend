@@ -23,7 +23,7 @@ namespace Mingems.Core.Models
         public Investment Create(string user, Investment investment)
         {
             Id = Guid.NewGuid().ToString();
-            RefId = Id.Substring(0, 4);
+            RefId = investment.RefId == null ? Id.Substring(0, 4) : investment.RefId;
             FirstName = investment.FirstName;
             LastName = investment.LastName;
             Email = investment.Email;
