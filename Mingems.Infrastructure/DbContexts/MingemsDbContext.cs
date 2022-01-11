@@ -16,6 +16,7 @@ namespace Mingems.Infrastructure.DbContexts
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<DashboardResponseModel> SPDashboard { get; set; }
+        public DbSet<TopInvestors> TopInvestors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -27,6 +28,7 @@ namespace Mingems.Infrastructure.DbContexts
             builder.Entity<Inventory>().HasQueryFilter(i => i.RecordState == RecordState.Active);
 
             builder.Entity<DashboardResponseModel>().HasNoKey();
+            builder.Entity<TopInvestors>().HasNoKey();
         }
     }
 }
