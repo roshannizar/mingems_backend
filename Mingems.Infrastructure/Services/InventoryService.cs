@@ -4,7 +4,6 @@ using Mingems.Core.Repositories;
 using Mingems.Core.Services;
 using Mingems.Infrastructure.Common;
 using Mingems.Shared.Infrastructure.Exceptions;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

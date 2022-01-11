@@ -9,6 +9,8 @@ using Mingems.Email.Service;
 using Mingems.Infrastructure.DbContexts;
 using Mingems.Infrastructure.Repositories;
 using Mingems.Infrastructure.Services;
+using Mingems.Report.Interfaces;
+using Mingems.Report.Services;
 using Mingems.Shared.Core.Helpers;
 using System;
 
@@ -30,6 +32,8 @@ namespace Mingems.Api.Extensions
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IInventoryService, InventoryService>();
             services.AddTransient<IPurchaseService, PurchaseService>();
+
+            services.AddTransient<IDashboardService, DashboardService>();
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
