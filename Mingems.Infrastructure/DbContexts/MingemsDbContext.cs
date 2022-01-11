@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mingems.Core.Models;
+using Mingems.Core.SPModels;
 using Mingems.Shared.Core.Enums;
 
 namespace Mingems.Infrastructure.DbContexts
@@ -14,6 +15,7 @@ namespace Mingems.Infrastructure.DbContexts
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<DashboardResponseModel> SPDashboard { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -23,6 +25,8 @@ namespace Mingems.Infrastructure.DbContexts
             builder.Entity<Customer>().HasQueryFilter(c => c.RecordState == RecordState.Active);
             builder.Entity<Purchase>().HasQueryFilter(p => p.RecordState == RecordState.Active);
             builder.Entity<Inventory>().HasQueryFilter(i => i.RecordState == RecordState.Active);
+
+            builder.Entity<DashboardResponseModel>().HasNoKey();
         }
     }
 }
