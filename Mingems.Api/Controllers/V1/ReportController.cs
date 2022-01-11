@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mingems.Api.Controllers.V1
 {
-    [Route("api/v1/report")]
+    [Route("api/v1/reports")]
     [ApiController]
     public class ReportController : BaseApiController
     {
