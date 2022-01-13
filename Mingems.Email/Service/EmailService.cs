@@ -1,6 +1,7 @@
 ﻿using Mingems.Shared.Core.Helpers;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mingems.Email.Service
@@ -19,8 +20,10 @@ namespace Mingems.Email.Service
         {
             var client = new SendGridClient(configuration.ApiKey);
             var from = new EmailAddress(configuration.SenderEmail, configuration.SenderName);
-            var to = new EmailAddress(senderMail);
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, finalContent, htmlContent);
+            var to = new List<EmailAddress>();
+            to.Add(new EmailAddress(senderMail));
+            to.Add(new EmailAddress(configuration.SenderEmail));
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, subject, finalContent, htmlContent);
             await client.SendEmailAsync(msg);
         }
         #endregion
