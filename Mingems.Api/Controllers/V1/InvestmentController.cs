@@ -62,5 +62,13 @@ namespace Mingems.Api.Controllers.V1
             var mappedInvestment = mapper.Map<IEnumerable<InvestmentDto>>(investment);
             return Ok(mappedInvestment);
         }
+
+        [HttpGet("origin")]
+        public async Task<ActionResult<IEnumerable<InvestmentDto>>> GetOriginInvestments()
+        {
+            var investment = await investmentService.GetUniqueInvestors();
+            var mappedInvestment = mapper.Map<IEnumerable<InvestmentDto>>(investment);
+            return Ok(mappedInvestment);
+        }
     }
 }

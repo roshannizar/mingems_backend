@@ -19,10 +19,12 @@ namespace Mingems.Core.Models
         public decimal Amount { get; set; }
         [Range(0, 9999999999999999.99)]
         public decimal RemainingAmount { get; set; }
+        public bool Origin { get; set; }
 
         public Investment Create(string user, Investment investment)
         {
             Id = Guid.NewGuid().ToString();
+            Origin = investment.RefId == null ? true : false;
             RefId = investment.RefId == null ? Id.Substring(0, 4) : investment.RefId;
             FirstName = investment.FirstName;
             LastName = investment.LastName;

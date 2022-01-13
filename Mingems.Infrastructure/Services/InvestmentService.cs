@@ -5,6 +5,7 @@ using Mingems.Core.Services;
 using Mingems.Infrastructure.Common;
 using Mingems.Shared.Infrastructure.Exceptions;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
@@ -36,6 +37,12 @@ namespace Mingems.Infrastructure.Services
         public async Task<Investment> GetAsync(string Id)
         {
             return await unitOfWork.InvestmentRepository.GetByIdAsync(Id);
+        }
+
+        public async Task<IEnumerable<Investment>> GetUniqueInvestors()
+        {
+            var query = await unitOfWork.InvestmentRepository.GetAllAsync();
+            return query.Where(i => i.Origin == true).ToList();
         }
 
         public async Task UpdateAsync(Investment model)
