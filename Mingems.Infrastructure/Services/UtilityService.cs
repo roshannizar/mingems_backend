@@ -53,7 +53,7 @@ namespace Mingems.Infrastructure.Services
             DateTime expireDate = new DateTime(long.Parse(expires));
             int result = DateTime.Compare(DateTime.Now, expireDate);
             if (result > -1)
-                throw new SecurityTokenExpiredException("Token expired");
+                throw new ExpiredTokenException("Token expired");
 
             if (email == null)
                 throw new ExpiredTokenException("Invalid Token, token may have been expired or invalid");
