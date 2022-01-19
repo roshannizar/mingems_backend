@@ -74,10 +74,10 @@ namespace Mingems.Api.Controllers
         }
 
         [HttpGet("lastlogged")]
-        public async Task<ActionResult<LastLoggedDto>> LastLoggedDate()
+        public async Task<ActionResult<IEnumerable<LastLoggedDto>>> LastLoggedDate()
         {
             var query = await userService.GetAllAsync();
-            var mappedQuery = mapper.Map<LastLoggedDto>(query.OrderByDescending(u => u.LastLoggedDate).ToList());
+            var mappedQuery = mapper.Map<IEnumerable<LastLoggedDto>>(query.OrderByDescending(u => u.LastLoggedDate).ToList());
             return Ok(mappedQuery);
         }
 
