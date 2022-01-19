@@ -61,10 +61,10 @@ namespace Mingems.Core.Models
             return this;
         }
 
-        public User LoggedDate()
+        public User LoggedDate(string ipAddress)
         {
             LastLoggedDate = DateTime.UtcNow;
-
+            IpAddress = ipAddress;
             return this;
         }
 
