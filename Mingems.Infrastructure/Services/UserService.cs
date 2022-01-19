@@ -7,7 +7,9 @@ using Mingems.Infrastructure.Common;
 using Mingems.Shared.Core.Extensions;
 using Mingems.Shared.Core.Helpers;
 using Mingems.Shared.Infrastructure.Exceptions;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
@@ -23,6 +25,21 @@ namespace Mingems.Infrastructure.Services
             this.emailService = emailService;
         }
 
+        #region IP Address
+        private async Task<string> CallIPAddress()
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("http://api.ipify.org/?format=json");
+            if(response.IsSuccessStatusCode)
+            {
+                var response2 = response.Content.ReadAsStringAsync();
+                var mappedObject = JObject.Parse(response2.Result);
+                return mappedObject["ip"].ToString();
+            }
+            return null;
+        }
+        #endregion
+
         public async Task<string> Authenticate(string email, string password)
         {
             var user = await unitOfWork.UserRepository
@@ -37,7 +54,8 @@ namespace Mingems.Infrastructure.Services
                 throw new AccountVerificationFailedException("Please check your email for the account verification");
             }
 
-            unitOfWork.UserRepository.Update(user.LoggedDate());
+            var ipAddress = await CallIPAddress();
+            unitOfWork.UserRepository.Update(user.LoggedDate(ipAddress));
             await unitOfWork.CommitAsync();
 
             var token = utilityService.GenerateToken(user);
