@@ -11,6 +11,7 @@ namespace Mingems.Api.Profiles
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, CreateUserDto>().ReverseMap();
             CreateMap<User, UpdateUserDto>().ReverseMap();
+            CreateMap<User, LastLoggedDto>().ReverseMap();
         }
     }
 }
