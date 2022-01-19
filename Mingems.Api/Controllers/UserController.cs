@@ -73,6 +73,14 @@ namespace Mingems.Api.Controllers
             return new JsonResult(new { message = "Account verified successfully!" }) { StatusCode = StatusCodes.Status200OK };
         }
 
+        [HttpGet("lastlogged")]
+        public async Task<ActionResult<LastLoggedDto>> LastLoggedDate()
+        {
+            var query = await userService.GetAllAsync();
+            var mappedQuery = mapper.Map<LastLoggedDto>(query.OrderByDescending(u => u.LastLoggedDate).ToList());
+            return Ok(mappedQuery);
+        }
+
         [HttpPost("forgotpassword")]
         public async Task<ActionResult> ForgotPassword(EmailModel emailModel)
         {
