@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Shared", "Mingems.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Email", "Mingems.Email\Mingems.Email.csproj", "{8E1684EB-0AEE-4916-AC31-035E59ACAF62}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.BackgroundJob", "Mingems.BackgroundJob\Mingems.BackgroundJob.csproj", "{B3A66FDD-DF25-4146-830A-3FC141302E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Queues", "Mingems.BackgroundJob\Mingems.Queues.csproj", "{B3A66FDD-DF25-4146-830A-3FC141302E1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mingems.Report", "Mingems.Report\Mingems.Report.csproj", "{AA30A7D3-8DF2-428E-9F0E-F7420A864E30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mingems.Report", "Mingems.Report\Mingems.Report.csproj", "{AA30A7D3-8DF2-428E-9F0E-F7420A864E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
