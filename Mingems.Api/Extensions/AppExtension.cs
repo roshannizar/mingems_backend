@@ -32,6 +32,7 @@ namespace Mingems.Api.Extensions
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IInventoryService, InventoryService>();
             services.AddTransient<IPurchaseService, PurchaseService>();
+            services.AddTransient<ISubscriptionService, SubscriptionService>();
 
             services.AddTransient<IDashboardService, DashboardService>();
 

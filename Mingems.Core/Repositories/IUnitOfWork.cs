@@ -10,6 +10,7 @@ namespace Mingems.Core.Repositories
         ICustomerRepository CustomerRepository { get; }
         IPurchaseRepository PurchaseRepository { get; }
         IInventoryRepository InventoryRepository { get; }
+        ISubscriptionRepository SubscriptionRepository { get; }
 
         Task<int> CommitAsync();
     }
