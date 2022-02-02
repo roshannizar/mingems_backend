@@ -22,17 +22,17 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<Inventory> Find(Expression<Func<Inventory, bool>> predicate)
         {
-            return context.Inventories.AsNoTracking().AsQueryable().Where(predicate).ToList();
+            return context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsQueryable().Where(predicate).ToList();
         }
 
         public async Task<IEnumerable<Inventory>> GetAllAsync()
         {
-            return await context.Inventories.AsNoTracking().AsNoTracking().ToListAsync();
+            return await context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsNoTracking().ToListAsync();
         }
 
         public async Task<Inventory> GetByIdAsync(string id)
         {
-            return await context.Inventories.AsNoTracking().AsQueryable().SingleOrDefaultAsync(i => i.Id == id);
+            return await context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsQueryable().SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public void Remove(Inventory entity)
@@ -42,7 +42,7 @@ namespace Mingems.Infrastructure.Repositories
 
         public async Task<Inventory> SingleOrDefaultAsync(Expression<Func<Inventory, bool>> predicate)
         {
-            return await context.Inventories.AsNoTracking().AsQueryable().SingleOrDefaultAsync(predicate);
+            return await context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsQueryable().SingleOrDefaultAsync(predicate);
         }
 
         public void Update(Inventory entity)

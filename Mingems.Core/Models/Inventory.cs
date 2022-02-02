@@ -10,9 +10,12 @@ namespace Mingems.Core.Models
     public class Inventory : AuditableEntity
     {
         public List<ImageLines> ImageLines { get; set; }
-        public string InvenstorId { get; set; }
+        public string InvestorId { get; set; }
         [ForeignKey("InvestorId")]
         public virtual Investment Investment { get; set; }
+        public string PurchaseId { get; set; }
+        [ForeignKey("PurchaseId")]
+        public virtual Purchase Purchase { get; set; }
         public string Barcode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -50,7 +53,8 @@ namespace Mingems.Core.Models
         {
             Id = Guid.NewGuid().ToString();
             ImageLines = CreateOrUpdateImageLines(user, inventory.ImageLines);
-            InvenstorId = inventory.InvenstorId;
+            InvestorId = inventory.InvestorId;
+            PurchaseId = inventory.PurchaseId;
             Barcode = inventory.Barcode;
             Name = inventory.Name;
             Description = inventory.Description;
@@ -65,6 +69,8 @@ namespace Mingems.Core.Models
 
             RecordState = RecordState.Active;
 
+            Investment = null;
+
             CreateAuditable(user);
 
             ModifiedAuditable(user);
@@ -76,7 +82,8 @@ namespace Mingems.Core.Models
         {
             Id = inventory.Id;
             ImageLines = CreateOrUpdateImageLines(user, inventory.ImageLines);
-            InvenstorId = inventory.InvenstorId;
+            InvestorId = inventory.InvestorId;
+            PurchaseId = inventory.PurchaseId;
             Barcode = inventory.Barcode;
             Name = inventory.Name;
             Description = inventory.Description;

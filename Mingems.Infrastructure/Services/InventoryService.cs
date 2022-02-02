@@ -16,6 +16,10 @@ namespace Mingems.Infrastructure.Services
         public async Task CreateAsync(Inventory model)
         {
             await unitOfWork.InventoryRepository.AddAsync(model.Create(email, model));
+            var purchase = await unitOfWork.PurchaseRepository.GetByIdAsync(model.PurchaseId);
+            if (purchase == null)
+                throw new NotFoundException("Purchase not found");
+            unitOfWork.PurchaseRepository.Update(purchase.MovedStatus(email));
             await unitOfWork.CommitAsync();
         }
 
