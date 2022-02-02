@@ -54,7 +54,6 @@ namespace Mingems.Core.Models
             UnitPrice = purchase.UnitPrice;
             SupplierId = purchase.SupplierId;
             ExportCost = purchase.ExportCost;
-            Moved = purchase.Moved;
 
             Investment = null;
             Supplier = null;
