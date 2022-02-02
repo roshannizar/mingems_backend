@@ -18,6 +18,7 @@ namespace Mingems.Core.Models
         [ForeignKey("SupplierId")]
         public virtual Supplier Supplier { get; set; }
         public decimal ExportCost { get; set; }
+        public bool Moved { get; set; }
 
         #region Not Mapped Fields
         [NotMapped]
@@ -34,6 +35,7 @@ namespace Mingems.Core.Models
             SupplierId = purchase.SupplierId;
             ExportCost = purchase.ExportCost;
             TransactionDate = DateTime.UtcNow;
+            Moved = purchase.Moved;
 
             RecordState = RecordState.Active;
 
@@ -52,6 +54,7 @@ namespace Mingems.Core.Models
             UnitPrice = purchase.UnitPrice;
             SupplierId = purchase.SupplierId;
             ExportCost = purchase.ExportCost;
+            Moved = purchase.Moved;
 
             Investment = null;
             Supplier = null;
@@ -69,6 +72,19 @@ namespace Mingems.Core.Models
             Investment = null;
             Supplier = null;
             RecordState = RecordState.Removed;
+
+            ModifiedAuditable(user);
+
+            return this;
+        }
+
+        public Purchase MovedStatus(string user)
+        {
+            Moved = true;
+            RecordState = RecordState.Active;
+
+            Investment = null;
+            Supplier = null;
 
             ModifiedAuditable(user);
 

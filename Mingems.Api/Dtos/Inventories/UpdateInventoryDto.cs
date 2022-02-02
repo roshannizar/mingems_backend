@@ -10,6 +10,7 @@ namespace Mingems.Api.Dtos.Inventories
         public List<UpdateImageLinesDto> ImageLines { get; set; }
         [Required]
         public string InvestorId { get; set; }
+        public string PurchaseId { get; set; }
         public string Barcode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mingems.Infrastructure.DbContexts;
 
 namespace Mingems.Infrastructure.Migrations
 {
     [DbContext(typeof(MingemsDbContext))]
-    partial class MingemsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220202172040_Remove-Spelling-Issues")]
+    partial class RemoveSpellingIssues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,9 +138,6 @@ namespace Mingems.Infrastructure.Migrations
                     b.Property<string>("PriceCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PurchaseId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -157,8 +156,6 @@ namespace Mingems.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("InvestorId");
-
-                    b.HasIndex("PurchaseId");
 
                     b.ToTable("Inventories");
                 });
@@ -240,9 +237,6 @@ namespace Mingems.Infrastructure.Migrations
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Moved")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -388,10 +382,6 @@ namespace Mingems.Infrastructure.Migrations
                     b.HasOne("Mingems.Core.Models.Investment", "Investment")
                         .WithMany()
                         .HasForeignKey("InvestorId");
-
-                    b.HasOne("Mingems.Core.Models.Purchase", "Purchase")
-                        .WithMany()
-                        .HasForeignKey("PurchaseId");
                 });
 
             modelBuilder.Entity("Mingems.Core.Models.Purchase", b =>
