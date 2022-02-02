@@ -14,6 +14,7 @@ namespace Mingems.Api.Dtos.Purchases
         public string SupplierId { get; set; }
         public virtual PurchaseSupplierDto Supplier { get; set; }
         public decimal ExportCost { get; set; }
+        public bool Moved { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

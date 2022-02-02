@@ -27,7 +27,7 @@ namespace Mingems.Infrastructure.Repositories
                 .Include(p => p.Investment)
                 .Include(p => p.Supplier)
                 .AsQueryable()
-                .OrderByDescending(p => p.TransactionDate)
+                .OrderByDescending(p => p.ModificationDate)
                 .Where(predicate).ToList();
         }
 
@@ -38,7 +38,7 @@ namespace Mingems.Infrastructure.Repositories
                 .Include(p => p.Investment)
                 .Include(p => p.Supplier)
                 .AsQueryable()
-                .OrderByDescending(p => p.TransactionDate)
+                .OrderByDescending(p => p.ModificationDate)
                 .ToListAsync();
         }
 
