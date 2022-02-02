@@ -15,6 +15,7 @@ namespace Mingems.Infrastructure.DbContexts
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<DashboardResponseModel> SPDashboard { get; set; }
         public DbSet<TopInvestors> TopInvestors { get; set; }
 
@@ -26,6 +27,7 @@ namespace Mingems.Infrastructure.DbContexts
             builder.Entity<Customer>().HasQueryFilter(c => c.RecordState == RecordState.Active);
             builder.Entity<Purchase>().HasQueryFilter(p => p.RecordState == RecordState.Active);
             builder.Entity<Inventory>().HasQueryFilter(i => i.RecordState == RecordState.Active);
+            builder.Entity<Subscription>().HasQueryFilter(s => s.RecordState == RecordState.Active);
 
             builder.Entity<DashboardResponseModel>().HasNoKey();
             builder.Entity<TopInvestors>().HasNoKey();

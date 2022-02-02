@@ -11,4 +11,11 @@
         Admin,
         Customer
     }
+
+    public enum SubscriptionStatus
+    {
+        NotPaid,
+        Pending,
+        Paid
+    }
 }
