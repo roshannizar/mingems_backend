@@ -64,5 +64,14 @@ namespace Mingems.Api.Controllers.V1
             var response = mapper.Map<InventoryDto>(inventory);
             return Ok(response);
         }
+
+        [Authorize(Role = "Admin")]
+        [HttpGet("{id}/purchase")]
+        public async Task<ActionResult<InventoryDto>> GetInventoryByPurchase(string id)
+        {
+            var inventory = await inventoryService.GetInventoryByPurchaseId(id);
+            var response = mapper.Map<InventoryDto>(inventory);
+            return Ok(response);
+        }
     }
 }

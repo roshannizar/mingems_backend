@@ -42,6 +42,11 @@ namespace Mingems.Infrastructure.Services
             return await unitOfWork.InventoryRepository.GetByIdAsync(Id);
         }
 
+        public async Task<Inventory> GetInventoryByPurchaseId(string Id)
+        {
+            return await unitOfWork.InventoryRepository.GetInventoryByPurchaseId(Id);
+        }
+
         public async Task UpdateAsync(Inventory model)
         {
             var inventory = await unitOfWork.InventoryRepository.GetByIdAsync(model.Id);
