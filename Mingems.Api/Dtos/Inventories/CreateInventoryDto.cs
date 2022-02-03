@@ -9,7 +9,6 @@ namespace Mingems.Api.Dtos.Inventories
         [Required]
         public string InvestorId { get; set; }
         public string PurchaseId { get; set; }
-        public string Barcode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; } = 1;
