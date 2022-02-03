@@ -55,7 +55,7 @@ namespace Mingems.Core.Models
             ImageLines = CreateOrUpdateImageLines(user, inventory.ImageLines);
             InvestorId = inventory.InvestorId;
             PurchaseId = inventory.PurchaseId;
-            Barcode = inventory.Barcode;
+            Barcode = Id.Substring(0,8);
             Name = inventory.Name;
             Description = inventory.Description;
             UnitPrice = inventory.UnitPrice;

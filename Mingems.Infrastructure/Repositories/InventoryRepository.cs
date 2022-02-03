@@ -35,6 +35,11 @@ namespace Mingems.Infrastructure.Repositories
             return await context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsQueryable().SingleOrDefaultAsync(i => i.Id == id);
         }
 
+        public async Task<Inventory> GetInventoryByPurchaseId(string Id)
+        {
+            return await context.Inventories.AsNoTracking().AsQueryable().SingleOrDefaultAsync(i => i.PurchaseId == Id);
+        }
+
         public void Remove(Inventory entity)
         {
             context.Inventories.Update(entity);
