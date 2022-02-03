@@ -67,10 +67,10 @@ namespace Mingems.Api.Controllers.V1
 
         [Authorize(Role = "Admin")]
         [HttpGet("{id}/purchase")]
-        public async Task<ActionResult<InventoryDto>> GetInventoryByPurchase(string id)
+        public async Task<ActionResult<InventoryPurchaseDto>> GetInventoryByPurchase(string id)
         {
             var inventory = await inventoryService.GetInventoryByPurchaseId(id);
-            var response = mapper.Map<InventoryDto>(inventory);
+            var response = mapper.Map<InventoryPurchaseDto>(inventory);
             return Ok(response);
         }
     }
