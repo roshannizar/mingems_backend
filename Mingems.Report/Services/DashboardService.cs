@@ -27,7 +27,7 @@ namespace Mingems.Report.Services
             return new DashboardModel()
             {
                 TotalCustomers = customerCount[0].Count,
-                TotalInvestor = investorsCount.Count,
+                TotalInvestor = investorsCount[0].Count,
                 TotalStocks = inventoryCount[0].Count,
                 Investors = topInvestors
             };
