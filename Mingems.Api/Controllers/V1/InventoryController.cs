@@ -5,6 +5,7 @@ using Mingems.Api.Dtos.Inventories;
 using Mingems.Api.Middleware;
 using Mingems.Core.Models;
 using Mingems.Core.Services;
+using Mingems.Shared.Api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -52,6 +53,15 @@ namespace Mingems.Api.Controllers.V1
         public async Task<ActionResult<IEnumerable<InventoryDto>>> GetInventories()
         {
             var inventory = await inventoryService.GetAllAsync();
+            var response = mapper.Map<IEnumerable<InventoryDto>>(inventory);
+            return Ok(response);
+        }
+
+        [Authorize(Role = "Admin")]
+        [HttpPost("search")]
+        public async Task<ActionResult<IEnumerable<InventoryDto>>> GEtSearchInventory(SearchFilterModel searchFilterModel)
+        {
+            var inventory = await inventoryService.SearchInventory(searchFilterModel);
             var response = mapper.Map<IEnumerable<InventoryDto>>(inventory);
             return Ok(response);
         }
