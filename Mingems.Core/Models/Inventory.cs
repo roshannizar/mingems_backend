@@ -33,7 +33,7 @@ namespace Mingems.Core.Models
         #region Private Methods
         private List<ImageLines> CreateOrUpdateImageLines(string user, List<ImageLines> imageLines)
         {
-            foreach(var image in ImageLines)
+            foreach(var image in imageLines)
             {
                 var item = ImageLines.FirstOrDefault(i => i.InventoryId == Id && i.Id == image.Id);
                 if(item == null)
@@ -42,6 +42,7 @@ namespace Mingems.Core.Models
                     image.InventoryId = Id;
                     image.CreationDate = DateTime.UtcNow;
                     image.CreatedBy = user;
+                    image.RecordState = RecordState.Active;
                 }
             }
 
