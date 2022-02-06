@@ -28,6 +28,7 @@ namespace Mingems.Infrastructure.DbContexts
             builder.Entity<Purchase>().HasQueryFilter(p => p.RecordState == RecordState.Active);
             builder.Entity<Inventory>().HasQueryFilter(i => i.RecordState == RecordState.Active);
             builder.Entity<Subscription>().HasQueryFilter(s => s.RecordState == RecordState.Active);
+            builder.Entity<ImageLines>().HasQueryFilter(i => i.RecordState == RecordState.Active);
 
             builder.Entity<DashboardResponseModel>().HasNoKey();
             builder.Entity<TopInvestors>().HasNoKey();
