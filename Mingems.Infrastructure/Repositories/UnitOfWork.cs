@@ -14,6 +14,7 @@ namespace Mingems.Infrastructure.Repositories
         private IInventoryRepository _inventoryRepository;
         private IPurchaseRepository _purchaseRepository;
         private ISubscriptionRepository _subscriptionRepository;
+        private IPrivateCodeRepository _privateCodeRepository;
 
         public UnitOfWork(MingemsDbContext context)
         {
@@ -27,6 +28,7 @@ namespace Mingems.Infrastructure.Repositories
         public IInventoryRepository InventoryRepository => _inventoryRepository ??= new InventoryRepository(context);
         public IPurchaseRepository PurchaseRepository => _purchaseRepository ??= new PurchaseRepository(context);
         public ISubscriptionRepository SubscriptionRepository => _subscriptionRepository ??= new SubscriptionRepository(context);
+        public IPrivateCodeRepository PrivateCodeRepository => _privateCodeRepository ??= new PrivateCodeRepository(context);
 
         public async Task<int> CommitAsync()
         {

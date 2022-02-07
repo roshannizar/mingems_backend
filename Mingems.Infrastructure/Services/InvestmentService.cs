@@ -32,6 +32,9 @@ namespace Mingems.Infrastructure.Services
                         trueMail = true;
                     }
                 }
+
+                if (!trueMail)
+                    throw new InvalidException("Invalid Email, Please try again with a valid mail");
             }
             #endregion
 
