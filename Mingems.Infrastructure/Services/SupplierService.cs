@@ -5,6 +5,7 @@ using Mingems.Core.Services;
 using Mingems.Infrastructure.Common;
 using Mingems.Shared.Infrastructure.Exceptions;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
@@ -24,6 +25,9 @@ namespace Mingems.Infrastructure.Services
             var availableSupplier = await unitOfWork.SupplierRepository.GetByIdAsync(Id);
             if (availableSupplier == null)
                 throw new NotFoundException($"{Id} Supplier Not Found");
+            var purchases = await unitOfWork.PurchaseRepository.GetAllAsync();
+            if (purchases.Where(p => p.SupplierId == availableSupplier.Id) != null)
+                throw new InvalidException($"{availableSupplier.Name} is already connected with another record, please remove the connected records!");
             unitOfWork.SupplierRepository.Remove(availableSupplier.Delete(email));
             await unitOfWork.CommitAsync();
         }
