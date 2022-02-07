@@ -16,6 +16,25 @@ namespace Mingems.Infrastructure.Services
 
         public async Task CreateAsync(Investment investment)
         {
+            #region Validate Email
+            if (!string.IsNullOrEmpty(investment.Email))
+            {
+                var trueMail = false;
+                List<string> checkEmail = new List<string>() { "outlook.com", "gmail.com", "yahoo.com", "hotmail.com" };
+
+                var index = investment.Email.IndexOf("@");
+                var removed = investment.Email.Substring(index + 1, investment.Email.Length - index - 1);
+
+                foreach (var item in checkEmail)
+                {
+                    if (item == removed)
+                    {
+                        trueMail = true;
+                    }
+                }
+            }
+            #endregion
+
             await unitOfWork.InvestmentRepository.AddAsync(investment.Create(email, investment));
             await unitOfWork.CommitAsync();
         }
