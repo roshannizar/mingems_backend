@@ -52,11 +52,11 @@ namespace Mingems.Api.Controllers.V1
 
         [Authorize(Role = "Admin")]
         [HttpPut]
-        public async Task<ActionResult> UpdatePrivateCode(CreatePrivateCodeDto privateCodeDto)
+        public async Task<ActionResult> UpdatePrivateCode(UpdatePrivateCodeDto privateCodeDto)
         {
             var response = mapper.Map<PrivateCode>(privateCodeDto);
             await privateCodeService.UpdateAsync(response);
-            return new JsonResult(new { message = "Private Code Updated Successfully!" }) { StatusCode = StatusCodes.Status201Created };
+            return new JsonResult(new { message = "Private Code Updated Successfully!" }) { StatusCode = StatusCodes.Status200OK };
         }
 
         [Authorize(Role = "Admin")]
@@ -64,7 +64,7 @@ namespace Mingems.Api.Controllers.V1
         public async Task<ActionResult> DeletePrivateCode(string Id)
         {
             await privateCodeService.DeleteAsync(Id);
-            return new JsonResult(new { message = "Private Code Deleted Successfully!" }) { StatusCode = StatusCodes.Status201Created };
+            return new JsonResult(new { message = "Private Code Deleted Successfully!" }) { StatusCode = StatusCodes.Status200OK };
         }
     }
 }
