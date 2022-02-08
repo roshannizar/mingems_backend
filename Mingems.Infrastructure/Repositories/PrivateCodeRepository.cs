@@ -23,12 +23,12 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<PrivateCode> Find(Expression<Func<PrivateCode, bool>> predicate)
         {
-            return context.PrivateCodes.Where(predicate).ToList();
+            return context.PrivateCodes.Where(predicate).OrderByDescending(p => p.ModificationDate).ToList();
         }
 
         public async Task<IEnumerable<PrivateCode>> GetAllAsync()
         {
-            return await context.PrivateCodes.ToListAsync();
+            return await context.PrivateCodes.OrderByDescending(p => p.ModificationDate).ToListAsync();
         }
 
         public async Task<PrivateCode> GetByIdAsync(string id)
