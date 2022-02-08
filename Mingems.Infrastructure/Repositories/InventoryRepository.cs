@@ -22,12 +22,12 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<Inventory> Find(Expression<Func<Inventory, bool>> predicate)
         {
-            return context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsQueryable().Where(predicate).ToList();
+            return context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsQueryable().OrderByDescending(i => i.ModificationDate).Where(predicate).ToList();
         }
 
         public async Task<IEnumerable<Inventory>> GetAllAsync()
         {
-            return await context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsNoTracking().ToListAsync();
+            return await context.Inventories.Include(i => i.ImageLines).Include(i => i.Investment).AsNoTracking().AsNoTracking().OrderByDescending(i => i.ModificationDate).ToListAsync();
         }
 
         public async Task<Inventory> GetByIdAsync(string id)

@@ -22,12 +22,12 @@ namespace Mingems.Infrastructure.Repositories
 
         public IEnumerable<Customer> Find(Expression<Func<Customer, bool>> predicate)
         {
-            return context.Customers.AsNoTracking().AsQueryable().Where(predicate).ToList();
+            return context.Customers.AsNoTracking().AsQueryable().OrderByDescending(c => c.ModificationDate).Where(predicate).ToList();
         }
 
         public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            return await context.Customers.AsNoTracking().AsQueryable().ToListAsync();
+            return await context.Customers.AsNoTracking().AsQueryable().OrderByDescending(c => c.ModificationDate).ToListAsync();
         }
 
         public async Task<Customer> GetByIdAsync(string id)
