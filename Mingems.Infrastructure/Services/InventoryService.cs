@@ -30,6 +30,8 @@ namespace Mingems.Infrastructure.Services
             var inventory = await unitOfWork.InventoryRepository.GetByIdAsync(Id);
             if (inventory == null)
                 throw new NotFoundException("inventory not found or already removed");
+            var purchase = await unitOfWork.PurchaseRepository.GetByIdAsync(inventory.PurchaseId);
+            unitOfWork.PurchaseRepository.Update(purchase.RevertMovedStatus(email));
             unitOfWork.InventoryRepository.Remove(inventory.Delete(email));
             await unitOfWork.CommitAsync();
         }

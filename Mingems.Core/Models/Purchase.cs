@@ -89,5 +89,18 @@ namespace Mingems.Core.Models
 
             return this;
         }
+
+        public Purchase RevertMovedStatus(string user)
+        {
+            Moved = false;
+            RecordState = RecordState.Active;
+
+            Investment = null;
+            Supplier = null;
+
+            ModifiedAuditable(user);
+
+            return this;
+        }
     }
 }
