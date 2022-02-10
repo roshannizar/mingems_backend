@@ -50,7 +50,7 @@ namespace Mingems.Api.Controllers.V1
 
         [Authorize(Role = "Admin")]
         [HttpPost("search")]
-        public async Task<ActionResult<IEnumerable<InventoryDto>>> GEtSearchInventory(SearchFilterModel searchFilterModel)
+        public async Task<ActionResult<IEnumerable<InventoryDto>>> GetSearchInventory([FromBody]SearchFilterModel searchFilterModel)
         {
             var inventory = await purchaseService.SearchInventory(searchFilterModel);
             var response = mapper.Map<IEnumerable<InventoryDto>>(inventory);

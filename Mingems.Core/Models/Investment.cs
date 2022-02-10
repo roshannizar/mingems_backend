@@ -24,8 +24,8 @@ namespace Mingems.Core.Models
         public Investment Create(string user, Investment investment)
         {
             Id = Guid.NewGuid().ToString();
-            Origin = investment.RefId == null;
-            RefId = investment.RefId ?? Id.Substring(0, 4);
+            Origin = string.IsNullOrEmpty(investment.RefId);
+            RefId = string.IsNullOrEmpty(investment.RefId) ? Id.Substring(0, 4) : investment.RefId;
             FirstName = investment.FirstName;
             LastName = investment.LastName;
             Email = investment.Email;
