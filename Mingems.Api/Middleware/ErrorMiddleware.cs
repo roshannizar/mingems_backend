@@ -39,26 +39,27 @@ namespace Mingems.Api.Middleware
                 {
                     case SecurityTokenExpiredException e:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        responseModel.Errors = ex.Message;
+                        responseModel.Errors = e.Message;
                         break;
                     case ExpiredTokenException e:
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        responseModel.Errors = ex.Message;
+                        responseModel.Errors = e.Message;
                         break;
                     case UserNotFoundException e:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
-                        responseModel.Errors = ex.Message;
+                        responseModel.Errors = e.Message;
                         break;
                     case AccountVerificationFailedException e:
                         response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        responseModel.Errors = ex.Message;
+                        responseModel.Errors = e.Message;
                         break;
                     case KeyNotFoundException e:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
+                        responseModel.Errors = e.Message;
                         break;
                     case NullReferenceException e:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        responseModel.Errors = "Something went wrong in the server";
+                        responseModel.Errors = e.Message;
                         break;
                     default:
                         if (ex.InnerException == null)

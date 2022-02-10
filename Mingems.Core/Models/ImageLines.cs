@@ -8,6 +8,6 @@ namespace Mingems.Core.Models
         public string URL { get; set; }
         public string PurchaseId { get; set; }
         [ForeignKey("PurchaseId")]
-        public virtual Purchase purchase { get; set; }
+        public virtual Purchase Purchase { get; set; }
     }
 }
