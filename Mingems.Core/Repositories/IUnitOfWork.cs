@@ -9,7 +9,6 @@ namespace Mingems.Core.Repositories
         IInvestmentRepository InvestmentRepository { get; }
         ICustomerRepository CustomerRepository { get; }
         IPurchaseRepository PurchaseRepository { get; }
-        IInventoryRepository InventoryRepository { get; }
         ISubscriptionRepository SubscriptionRepository { get; }
         IPrivateCodeRepository PrivateCodeRepository { get; }
 

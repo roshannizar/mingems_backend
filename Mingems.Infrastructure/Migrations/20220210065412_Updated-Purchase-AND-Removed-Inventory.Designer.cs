@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mingems.Infrastructure.DbContexts;
 
 namespace Mingems.Infrastructure.Migrations
 {
     [DbContext(typeof(MingemsDbContext))]
-    partial class MingemsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220210065412_Updated-Purchase-AND-Removed-Inventory")]
+    partial class UpdatedPurchaseANDRemovedInventory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
