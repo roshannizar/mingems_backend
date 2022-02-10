@@ -11,6 +11,8 @@ namespace Mingems.Api.Profiles
             CreateMap<Purchase, InventoryDto>().ReverseMap();
             CreateMap<Purchase, UpdateInventoryDto>().ReverseMap();
 
+            CreateMap<Supplier, InventorySupplierDto>().ReverseMap();
+
             CreateMap<ImageLines, ImageLinesDto>().ReverseMap();
             CreateMap<ImageLines, CreateImageLinesDto>().ReverseMap();
             CreateMap<ImageLines, UpdateImageLinesDto>().ReverseMap();
