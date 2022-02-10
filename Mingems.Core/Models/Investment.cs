@@ -90,8 +90,16 @@ namespace Mingems.Core.Models
                 {
                     RemainingAmount -= tempAmount;
                 }
-                else 
-                    throw new InvalidOperationException("Investor amount balance exceeded");
+                else
+                {
+                    var tempSecondAmount = previousAmount + RemainingAmount;
+                    var temp = tempSecondAmount - amount;
+
+                    if (temp >= 0)
+                        RemainingAmount -= temp;
+                    else 
+                        throw new InvalidOperationException("Investor amount balance exceeded");
+                }
             }
 
             ModifiedAuditable(user);
