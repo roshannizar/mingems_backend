@@ -27,7 +27,7 @@ namespace Mingems.Api.Controllers.V1
         public async Task<ActionResult> UpdateInventory(UpdateInventoryDto inventoryDto)
         {
             var inventory = mapper.Map<Purchase>(inventoryDto);
-            await purchaseService.UpdateAsync(inventory);
+            await purchaseService.UpdateInventoryAsync(inventory);
             return new JsonResult(new { message = "Inventory updated successfully" }) { StatusCode = StatusCodes.Status200OK };
         }
 

@@ -12,5 +12,6 @@ namespace Mingems.Core.Services
         Task<Purchase> GetInventory(string Id);
         Task<IEnumerable<Purchase>> SearchInventory(SearchFilterModel searchFilterModel);
         Task DeleteInventoryAsync(string Id);
+        Task UpdateInventoryAsync(Purchase purchase);
     }
 }
