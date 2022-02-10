@@ -116,5 +116,15 @@ namespace Mingems.Infrastructure.Services
             unitOfWork.PurchaseRepository.Update(purchase.Update(email, model));
             await unitOfWork.CommitAsync();
         }
+
+        public async Task UpdateInventoryAsync(Purchase model)
+        {
+            var purchase = await unitOfWork.PurchaseRepository.GetByIdAsync(model.Id);
+            if (purchase == null)
+                throw new NotFoundException("Purchase not found or already removed");
+
+            unitOfWork.PurchaseRepository.Update(purchase.MovedStatus(email, model));
+            await unitOfWork.CommitAsync();
+        }
     }
 }

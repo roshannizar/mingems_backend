@@ -44,8 +44,18 @@ namespace Mingems.Core.Models
             {
                 foreach (var image in imageLines)
                 {
-                    var item = ImageLines.FirstOrDefault(i => i.PurchaseId == Id && i.Id == image.Id);
-                    if (item == null)
+                    if (ImageLines != null)
+                    {
+                        var item = ImageLines.FirstOrDefault(i => i.PurchaseId == Id && i.Id == image.Id);
+                        if (item == null)
+                        {
+                            image.Id = Guid.NewGuid().ToString();
+                            image.PurchaseId = Id;
+                            image.CreationDate = DateTime.UtcNow;
+                            image.CreatedBy = user;
+                            image.RecordState = RecordState.Active;
+                        }
+                    } else
                     {
                         image.Id = Guid.NewGuid().ToString();
                         image.PurchaseId = Id;
