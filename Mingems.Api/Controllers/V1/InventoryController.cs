@@ -15,28 +15,19 @@ namespace Mingems.Api.Controllers.V1
     [ApiController]
     public class InventoryController : BaseApiController
     {
-        private readonly IInventoryService inventoryService;
+        private readonly IPurchaseService purchaseService;
 
-        public InventoryController(IInventoryService inventoryService, IMapper mapper): base(mapper)
+        public InventoryController(IPurchaseService purchaseService, IMapper mapper): base(mapper)
         {
-            this.inventoryService = inventoryService;
-        }
-
-        [Authorize(Role = "Admin")]
-        [HttpPost]
-        public async Task<ActionResult> CreateInventory(CreateInventoryDto inventoryDto)
-        {
-            var inventory = mapper.Map<Inventory>(inventoryDto);
-            await inventoryService.CreateAsync(inventory);
-            return new JsonResult(new { message = "Inventory created successfully" }) { StatusCode = StatusCodes.Status201Created };
+            this.purchaseService = purchaseService;
         }
 
         [Authorize(Role = "Admin")]
         [HttpPut]
         public async Task<ActionResult> UpdateInventory(UpdateInventoryDto inventoryDto)
         {
-            var inventory = mapper.Map<Inventory>(inventoryDto);
-            await inventoryService.UpdateAsync(inventory);
+            var inventory = mapper.Map<Purchase>(inventoryDto);
+            await purchaseService.UpdateAsync(inventory);
             return new JsonResult(new { message = "Inventory updated successfully" }) { StatusCode = StatusCodes.Status200OK };
         }
 
@@ -44,7 +35,7 @@ namespace Mingems.Api.Controllers.V1
         [HttpDelete]
         public async Task<ActionResult> DeleteInventory(string Id)
         {
-            await inventoryService.DeleteAsync(Id);
+            await purchaseService.DeleteAsync(Id);
             return new JsonResult(new { message = "Inventory deleted successfully" }) { StatusCode = StatusCodes.Status200OK };
         }
 
@@ -52,7 +43,7 @@ namespace Mingems.Api.Controllers.V1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InventoryDto>>> GetInventories()
         {
-            var inventory = await inventoryService.GetAllAsync();
+            var inventory = await purchaseService.GetAllAsync();
             var response = mapper.Map<IEnumerable<InventoryDto>>(inventory);
             return Ok(response);
         }
@@ -61,7 +52,7 @@ namespace Mingems.Api.Controllers.V1
         [HttpPost("search")]
         public async Task<ActionResult<IEnumerable<InventoryDto>>> GEtSearchInventory(SearchFilterModel searchFilterModel)
         {
-            var inventory = await inventoryService.SearchInventory(searchFilterModel);
+            var inventory = await purchaseService.SearchInventory(searchFilterModel);
             var response = mapper.Map<IEnumerable<InventoryDto>>(inventory);
             return Ok(response);
         }
@@ -70,17 +61,8 @@ namespace Mingems.Api.Controllers.V1
         [HttpGet("{id}")]
         public async Task<ActionResult<InventoryDto>> GetInventory(string Id)
         {
-            var inventory = await inventoryService.GetAsync(Id);
+            var inventory = await purchaseService.GetAsync(Id);
             var response = mapper.Map<InventoryDto>(inventory);
-            return Ok(response);
-        }
-
-        [Authorize(Role = "Admin")]
-        [HttpGet("{id}/purchase")]
-        public async Task<ActionResult<InventoryPurchaseDto>> GetInventoryByPurchase(string id)
-        {
-            var inventory = await inventoryService.GetInventoryByPurchaseId(id);
-            var response = mapper.Map<InventoryPurchaseDto>(inventory);
             return Ok(response);
         }
     }

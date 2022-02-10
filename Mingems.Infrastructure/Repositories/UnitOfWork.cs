@@ -11,7 +11,6 @@ namespace Mingems.Infrastructure.Repositories
         private ISupplierRepository _supplierRepository;
         private IInvestmentRepository _investmentRepository;
         private ICustomerRepository _customerRepository;
-        private IInventoryRepository _inventoryRepository;
         private IPurchaseRepository _purchaseRepository;
         private ISubscriptionRepository _subscriptionRepository;
         private IPrivateCodeRepository _privateCodeRepository;
@@ -25,7 +24,6 @@ namespace Mingems.Infrastructure.Repositories
         public ISupplierRepository SupplierRepository => _supplierRepository ??= new SupplierRepository(context);
         public IInvestmentRepository InvestmentRepository => _investmentRepository ??= new InvestmentRepository(context);
         public ICustomerRepository CustomerRepository => _customerRepository ??= new CustomerRepository(context);
-        public IInventoryRepository InventoryRepository => _inventoryRepository ??= new InventoryRepository(context);
         public IPurchaseRepository PurchaseRepository => _purchaseRepository ??= new PurchaseRepository(context);
         public ISubscriptionRepository SubscriptionRepository => _subscriptionRepository ??= new SubscriptionRepository(context);
         public IPrivateCodeRepository PrivateCodeRepository => _privateCodeRepository ??= new PrivateCodeRepository(context);

@@ -52,6 +52,16 @@ namespace Mingems.Infrastructure.Repositories
                 .SingleOrDefaultAsync(p => p.Id == id);
         }
 
+        public async Task<IEnumerable<Purchase>> GetInventories()
+        {
+            return await context.Purchases.Include(i => i.ImageLines).Include(i => i.Investment).Include(i => i.Supplier).AsNoTracking().AsNoTracking().OrderByDescending(i => i.ModificationDate).Where(i => i.Moved == true).ToListAsync();
+        }
+
+        public async Task<Purchase> GetInventory(string id)
+        {
+            return await context.Purchases.Include(i => i.ImageLines).Include(i => i.Investment).Include(i => i.Supplier).AsNoTracking().AsQueryable().SingleOrDefaultAsync(i => i.Id == id && i.Moved == true);
+        }
+
         public void Remove(Purchase entity)
         {
             context.Purchases.Update(entity);
@@ -69,7 +79,15 @@ namespace Mingems.Infrastructure.Repositories
 
         public void Update(Purchase entity)
         {
-            context.Purchases.Update(entity);
+            context.Entry(entity).State = EntityState.Modified;
+
+            foreach (var image in entity.ImageLines)
+            {
+                if (image.CreationDate.Date == DateTime.UtcNow.Date)
+                    context.Entry(image).State = EntityState.Added;
+                else
+                    context.Entry(image).State = EntityState.Modified;
+            }
         }
     }
 }

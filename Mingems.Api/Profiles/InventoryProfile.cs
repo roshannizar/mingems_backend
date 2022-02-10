@@ -8,10 +8,8 @@ namespace Mingems.Api.Profiles
     {
         public InventoryProfile()
         {
-            CreateMap<Inventory, InventoryDto>().ReverseMap();
-            CreateMap<Inventory, InventoryPurchaseDto>().ReverseMap();
-            CreateMap<Inventory, CreateInventoryDto>().ReverseMap();
-            CreateMap<Inventory, UpdateInventoryDto>().ReverseMap();
+            CreateMap<Purchase, InventoryDto>().ReverseMap();
+            CreateMap<Purchase, UpdateInventoryDto>().ReverseMap();
 
             CreateMap<ImageLines, ImageLinesDto>().ReverseMap();
             CreateMap<ImageLines, CreateImageLinesDto>().ReverseMap();
