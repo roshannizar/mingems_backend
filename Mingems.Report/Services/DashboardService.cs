@@ -28,7 +28,7 @@ namespace Mingems.Report.Services
             {
                 TotalCustomers = customerCount[0].Count,
                 TotalInvestor = investorsCount[0].Count,
-                TotalStocks = inventoryCount[0].Count,
+                TotalStocks = inventoryCount.Count,
                 Investors = topInvestors
             };
         }
