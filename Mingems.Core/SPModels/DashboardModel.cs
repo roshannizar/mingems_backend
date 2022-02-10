@@ -7,6 +7,8 @@ namespace Mingems.Core.SPModels
         public int TotalStocks { get; set; }
         public int TotalCustomers { get; set; }
         public int TotalInvestor { get; set; }
+        public int TotalPurchases { get; set; }
+        public int TotalSupplier { get; set; }
         public List<TopInvestors> Investors { get; set; }
     }
 
