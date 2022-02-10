@@ -35,6 +35,15 @@ namespace Mingems.Infrastructure.Services
             await unitOfWork.CommitAsync();
         }
 
+        public async Task DeleteInventoryAsync(string Id)
+        {
+            var purchase = await unitOfWork.PurchaseRepository.GetByIdAsync(Id);
+            if (purchase == null)
+                throw new NotFoundException("Purchase not found or already removed");
+            unitOfWork.PurchaseRepository.Update(purchase.RevertMovedStatus(email));
+            await unitOfWork.CommitAsync();
+        }
+
         public async Task<IEnumerable<Purchase>> GetAllAsync()
         {
             return await unitOfWork.PurchaseRepository.GetAllAsync();

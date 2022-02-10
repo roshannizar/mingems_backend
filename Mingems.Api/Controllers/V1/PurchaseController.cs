@@ -43,7 +43,7 @@ namespace Mingems.Api.Controllers.V1
         [HttpDelete]
         public async Task<ActionResult> DeletePurchase(string Id)
         {
-            await purchaseService.DeleteAsync(Id);
+            await purchaseService.DeleteInventoryAsync(Id);
             return new JsonResult(new { message = "Purchase deleted successfully" }) { StatusCode = StatusCodes.Status201Created };
         }
 
