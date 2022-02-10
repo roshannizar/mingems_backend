@@ -25,6 +25,7 @@ namespace Mingems.Api.Dtos.Inventories
         public string PriceCode { get; set; }
         public string LastPriceCode { get; set; }
         public DateTime TransactionDate { get; set; }
+        public bool Moved { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }
