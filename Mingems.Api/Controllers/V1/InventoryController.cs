@@ -43,7 +43,7 @@ namespace Mingems.Api.Controllers.V1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InventoryDto>>> GetInventories()
         {
-            var inventory = await purchaseService.GetAllAsync();
+            var inventory = await purchaseService.GetInventories();
             var response = mapper.Map<IEnumerable<InventoryDto>>(inventory);
             return Ok(response);
         }
@@ -61,7 +61,7 @@ namespace Mingems.Api.Controllers.V1
         [HttpGet("{id}")]
         public async Task<ActionResult<InventoryDto>> GetInventory(string Id)
         {
-            var inventory = await purchaseService.GetAsync(Id);
+            var inventory = await purchaseService.GetInventory(Id);
             var response = mapper.Map<InventoryDto>(inventory);
             return Ok(response);
         }
