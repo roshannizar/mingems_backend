@@ -9,6 +9,8 @@ namespace Mingems.Api.Dtos.Inventories
         public List<ImageLinesDto> ImageLines { get; set; }
         public string InvestorId { get; set; }
         public virtual InventoryInvestorDto Investment { get; set; }
+        public string SupplierId { get; set; }
+        public InventorySupplierDto Supplier { get; set; }
         public string Barcode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
