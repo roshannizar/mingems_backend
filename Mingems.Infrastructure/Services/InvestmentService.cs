@@ -49,7 +49,7 @@ namespace Mingems.Infrastructure.Services
                 throw new NotFoundException("Investment not found or already removed");
             var purchases = await unitOfWork.PurchaseRepository.GetAllAsync();
             var count = purchases.Where(p => p.InvestorId == investment.Id).ToList().Count;
-            if (count <= 0)
+            if (count > 0)
                 throw new InvalidException($"{investment.FirstName} is already connected with another record, please remove the connected records!");
             unitOfWork.InvestmentRepository.Remove(investment.Delete(email));
             await unitOfWork.CommitAsync();
