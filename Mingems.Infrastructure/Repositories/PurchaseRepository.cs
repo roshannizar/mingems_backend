@@ -81,12 +81,15 @@ namespace Mingems.Infrastructure.Repositories
         {
             context.Entry(entity).State = EntityState.Modified;
 
-            foreach (var image in entity.ImageLines)
+            if (entity.ImageLines != null)
             {
-                if (image.CreationDate.Date == DateTime.UtcNow.Date)
-                    context.Entry(image).State = EntityState.Added;
-                else
-                    context.Entry(image).State = EntityState.Modified;
+                foreach (var image in entity.ImageLines)
+                {
+                    if (image.CreationDate.Date == DateTime.UtcNow.Date)
+                        context.Entry(image).State = EntityState.Added;
+                    else
+                        context.Entry(image).State = EntityState.Modified;
+                }
             }
         }
     }
