@@ -24,12 +24,12 @@ namespace Mingems.Core.Models
         public virtual Supplier Supplier { get; set; }
         public decimal RecuttingCost { get; set; }
         public decimal CertificateCost { get; set; }
-        public decimal CommissionCost { get; set; }
+        public decimal? CommissionCost { get; set; }
         public decimal ExportCost { get; set; }
-        public string Measurement { get; set; }
-        public string Weight { get; set; }
-        public string PriceCode { get; set; }
-        public string LastPriceCode { get; set; }
+        public string? Measurement { get; set; }
+        public string? Weight { get; set; }
+        public string? PriceCode { get; set; }
+        public string? LastPriceCode { get; set; }
         public bool Moved { get; set; }
 
         #region Not Mapped Fields
@@ -79,7 +79,7 @@ namespace Mingems.Core.Models
             Description = purchase.Description;
             InvestorId = purchase.InvestorId;
             UnitPrice = purchase.UnitPrice;
-            Quantity = purchase.Quantity;
+            Quantity = 1;
             RecuttingCost = purchase.RecuttingCost;
             CertificateCost = purchase.CertificateCost;
             CommissionCost = purchase.CommissionCost;
@@ -147,7 +147,7 @@ namespace Mingems.Core.Models
         {
             Moved = true;
             ImageLines = CreateOrUpdateImageLines(user, purchase.ImageLines);
-            Quantity = purchase.Quantity;
+            Quantity = 1;
             RecuttingCost = purchase.RecuttingCost;
             CertificateCost = purchase.CertificateCost;
             CommissionCost = purchase.CommissionCost;
@@ -169,6 +169,7 @@ namespace Mingems.Core.Models
         public Purchase RevertMovedStatus(string user)
         {
             Moved = false;
+            Quantity = 1;
             RecordState = RecordState.Active;
 
             Investment = null;
