@@ -76,17 +76,18 @@ namespace Mingems.Infrastructure.Services
                 .Contains(searchFilterModel.InvestorName.ToLower()) || i.Investment.LastName.ToLower()
                 .Contains(searchFilterModel.InvestorName.ToLower()));
             if (!string.IsNullOrEmpty(searchFilterModel.InvestorRefId))
-                query = query.Where(i => i.Investment.RefId.ToLower()
-                .Contains(searchFilterModel.InvestorRefId.ToLower()));
+                query = query.Where(i => i.Investment.RefId
+                .Contains(searchFilterModel.InvestorRefId));
             if (!string.IsNullOrEmpty(searchFilterModel.Measurement))
-                query = query.Where(i => i.Measurement.ToLower()
-                .Contains(searchFilterModel.Measurement.ToLower()));
+                query = query.Where(i => i.Measurement != null)
+                    .Where(i => i.Measurement
+                .Contains(searchFilterModel.Measurement));
             if (!string.IsNullOrEmpty(searchFilterModel.Name))
                 query = query.Where(i => i.Name.ToLower()
                 .Contains(searchFilterModel.Name.ToLower()));
             if (!string.IsNullOrEmpty(searchFilterModel.Weight))
-                query = query.Where(i => i.Weight.ToLower()
-                .Contains(searchFilterModel.Weight.ToLower()));
+                query = query.Where(i => i.Weight != null)
+                    .Where(i => i.Weight.Contains(searchFilterModel.Weight));
             if (searchFilterModel.UnitPrice > 0)
                 query = query.Where(i => i.UnitPrice == searchFilterModel.UnitPrice);
 
