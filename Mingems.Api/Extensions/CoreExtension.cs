@@ -15,6 +15,8 @@ namespace Mingems.Api.Extensions
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
+            services.AddSignalR();
         }
 
         public static void AddCoreMiddleware(this IApplicationBuilder app)

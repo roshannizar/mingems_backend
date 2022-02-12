@@ -18,4 +18,17 @@
         Pending,
         Paid
     }
+
+    public enum OrderStatus
+    {
+        Pending,
+        Paid,
+        Cancelled
+    }
+
+    public enum PaymentType
+    {
+        Cash,
+        Card
+    }
 }

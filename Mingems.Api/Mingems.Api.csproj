@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Hangfire" Version="1.7.28" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.21">
@@ -18,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Mingems.Email\Mingems.Email.csproj" />
     <ProjectReference Include="..\Mingems.Infrastructure\Mingems.Infrastructure.csproj" />
+    <ProjectReference Include="..\Mingems.Queues\Mingems.Queues.csproj" />
     <ProjectReference Include="..\Mingems.Report\Mingems.Report.csproj" />
   </ItemGroup>
 
