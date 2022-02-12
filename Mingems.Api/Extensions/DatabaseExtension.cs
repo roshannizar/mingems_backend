@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mingems.Infrastructure.DbContexts;
@@ -13,6 +14,9 @@ namespace Mingems.Api.Extensions
             {
                 options.UseSqlServer(Configuration.GetConnectionString("MingemsDb"));
             });
+
+            services.AddHangfire(h => h.UseSqlServerStorage(Configuration.GetConnectionString("MingemsDb")));
+            services.AddHangfireServer();
         }
     }
 }

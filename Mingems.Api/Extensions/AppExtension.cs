@@ -9,6 +9,8 @@ using Mingems.Email.Service;
 using Mingems.Infrastructure.DbContexts;
 using Mingems.Infrastructure.Repositories;
 using Mingems.Infrastructure.Services;
+using Mingems.Infrastructure.SignalRHub;
+using Mingems.Queues.Services;
 using Mingems.Report.Interfaces;
 using Mingems.Report.Services;
 using Mingems.Shared.Core.Helpers;
@@ -34,6 +36,9 @@ namespace Mingems.Api.Extensions
             services.AddTransient<ISubscriptionService, SubscriptionService>();
             services.AddTransient<IPrivateCodeService, PrivateCodeService>();
 
+            services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IBackgroundService, BackgroundService>();
+
             services.AddTransient<IDashboardService, DashboardService>();
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
@@ -43,6 +48,8 @@ namespace Mingems.Api.Extensions
                 .Get<EmailSenderOptions>();
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailService, EmailService>();
+
+            services.AddHealthChecks();
         }
 
         public static void AddAppMiddleware(this IApplicationBuilder app)
@@ -50,7 +57,10 @@ namespace Mingems.Api.Extensions
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<MessageHub>("/message");
             });
+
+            app.UseHealthChecks("/health");
         }
     }
 }
