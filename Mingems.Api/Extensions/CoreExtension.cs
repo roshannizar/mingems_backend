@@ -22,9 +22,10 @@ namespace Mingems.Api.Extensions
         public static void AddCoreMiddleware(this IApplicationBuilder app)
         {
             app.UseCors(x => x
-                .AllowAnyOrigin()
+                .AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials());
 
             app.UseHttpsRedirection();
 
