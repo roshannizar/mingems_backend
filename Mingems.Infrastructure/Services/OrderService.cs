@@ -43,7 +43,7 @@ namespace Mingems.Infrastructure.Services
             var order = await unitOfWork.OrderRepository.GetByIdAsync(model.Id);
             await emailService.SendOrderInvoice(order);
 
-            await notificationService.SendNotification($"Order has been placed and invoice has been sent to {model.CustomerId}");
+            await notificationService.SendNotification($"Order has been placed and invoice has been sent to {order.Customer.Email}");
         }
 
         public Task DeleteAsync(string Id)
