@@ -5,8 +5,10 @@ using Mingems.Core.Services;
 using Mingems.Email.Service;
 using Mingems.Infrastructure.Common;
 using Mingems.Queues.Services;
+using Mingems.Shared.Core.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
@@ -57,6 +59,20 @@ namespace Mingems.Infrastructure.Services
         public async Task<Order> GetAsync(string Id)
         {
             return await unitOfWork.OrderRepository.GetByIdAsync(Id);
+        }
+
+        public async Task<IEnumerable<Order>> GetOrderByStatus(int status)
+        {
+            var query = await unitOfWork.OrderRepository.GetAllAsync();
+
+            if (status == 0)
+                return query.Where(o => (int)o.OrderStatus == status).ToList();
+            else if (status == 1)
+                return query.Where(o => (int)o.OrderStatus == status).ToList();
+            else if (status == 2)
+                return query.Where(o => (int)o.OrderStatus == status).ToList();
+            else
+                return query;
         }
 
         public Task UpdateAsync(Order model)

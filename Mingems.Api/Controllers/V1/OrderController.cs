@@ -33,9 +33,9 @@ namespace Mingems.Api.Controllers.V1
 
         [Authorize(Role = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders(int status)
         {
-            var order = await orderService.GetAllAsync();
+            var order = await orderService.GetOrderByStatus(status);
             var response = mapper.Map<IEnumerable<OrderDto>>(order);
             return Ok(response);
         }
