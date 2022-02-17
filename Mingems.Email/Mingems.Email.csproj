@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mingems.Core\Mingems.Core.csproj" />
     <ProjectReference Include="..\Mingems.Shared\Mingems.Shared.csproj" />
   </ItemGroup>
 

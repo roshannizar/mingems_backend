@@ -1,4 +1,6 @@
-﻿using Mingems.Shared.Core.Helpers;
+﻿using Mingems.Core.Models;
+using Mingems.Email.Templates;
+using Mingems.Shared.Core.Helpers;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Collections.Generic;
@@ -42,6 +44,14 @@ namespace Mingems.Email.Service
             var subject = "Mingems | Password Reset";
             var finalContent = "Thank you for using our service";
             await Send(subject, email, content, finalContent);
+        }
+
+        public async Task SendOrderInvoice(Order order)
+        {
+            var content = EmailTemplate.GetHTMLOrder(order);
+            var subject = "Mingems | Your order invoice";
+            var finalContent = "Thank You for shopping with us, Have a nice day!<br/>";
+            await Send(subject, order.Customer.Email, content, finalContent);
         }
     }
 }

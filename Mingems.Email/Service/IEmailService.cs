@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Mingems.Core.Models;
+using System.Threading.Tasks;
 
 namespace Mingems.Email.Service
 {
@@ -6,6 +7,6 @@ namespace Mingems.Email.Service
     {
         Task SendVerification(string email, string token);
         Task SendForgotPasswordLink(string email, string token);
-        // Task SendOrderInvoice(Order order);
+        Task SendOrderInvoice(Order order);
     }
 }

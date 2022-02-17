@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Mingems.Core\Mingems.Core.csproj" />
     <ProjectReference Include="..\Mingems.Email\Mingems.Email.csproj" />
+    <ProjectReference Include="..\Mingems.Queues\Mingems.Queues.csproj" />
   </ItemGroup>
 
 </Project>

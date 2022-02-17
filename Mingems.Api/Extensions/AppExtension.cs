@@ -35,6 +35,7 @@ namespace Mingems.Api.Extensions
             services.AddTransient<IPurchaseService, PurchaseService>();
             services.AddTransient<ISubscriptionService, SubscriptionService>();
             services.AddTransient<IPrivateCodeService, PrivateCodeService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IBackgroundService, BackgroundService>();
