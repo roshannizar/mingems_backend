@@ -5,6 +5,8 @@ using Mingems.Api.Dtos.Orders;
 using Mingems.Api.Middleware;
 using Mingems.Core.Models;
 using Mingems.Core.Services;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mingems.Api.Controllers.V1
@@ -27,6 +29,15 @@ namespace Mingems.Api.Controllers.V1
             var order = mapper.Map<Order>(orderDto);
             await orderService.CreateAsync(order);
             return new JsonResult(new { message = "Order has been placed!" }) { StatusCode = StatusCodes.Status201Created };
+        }
+
+        [Authorize(Role = "Admin")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders()
+        {
+            var order = await orderService.GetAllAsync();
+            var response = mapper.Map<IEnumerable<OrderDto>>(order);
+            return Ok(response);
         }
     }
 }

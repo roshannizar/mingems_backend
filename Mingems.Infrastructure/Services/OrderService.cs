@@ -7,7 +7,6 @@ using Mingems.Infrastructure.Common;
 using Mingems.Queues.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Mingems.Infrastructure.Services
@@ -50,14 +49,14 @@ namespace Mingems.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Order>> GetAllAsync()
+        public async Task<IEnumerable<Order>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await unitOfWork.OrderRepository.GetAllAsync();
         }
 
-        public Task<Order> GetAsync(string Id)
+        public async Task<Order> GetAsync(string Id)
         {
-            throw new NotImplementedException();
+            return await unitOfWork.OrderRepository.GetByIdAsync(Id);
         }
 
         public Task UpdateAsync(Order model)
