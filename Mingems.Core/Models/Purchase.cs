@@ -179,5 +179,18 @@ namespace Mingems.Core.Models
 
             return this;
         }
+
+        public Purchase UpdateQuantity(string user)
+        {
+            Quantity = 0;
+            RecordState = RecordState.Active;
+
+            Investment = null;
+            Supplier = null;
+
+            ModifiedAuditable(user);
+
+            return this;
+        }
     }
 }

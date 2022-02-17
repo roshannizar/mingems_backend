@@ -22,7 +22,7 @@ namespace Mingems.Core.Models
             Id = Guid.NewGuid().ToString();
             OrderId = orderId;
             ProductId = orderLine.ProductId;
-            Quantity = orderLine.Quantity;
+            Quantity = 1;
             SoldPrice = orderLine.SoldPrice;
             ActualPrice = orderLine.ActualPrice;
 
