@@ -20,6 +20,7 @@ namespace Mingems.Infrastructure.DbContexts
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<DashboardResponseModel> SPDashboard { get; set; }
         public DbSet<TopInvestors> TopInvestors { get; set; }
+        public DbSet<TopCustomers> TopCustomers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,6 +37,7 @@ namespace Mingems.Infrastructure.DbContexts
 
             builder.Entity<DashboardResponseModel>().HasNoKey();
             builder.Entity<TopInvestors>().HasNoKey();
+            builder.Entity<TopCustomers>().HasNoKey();
         }
     }
 }

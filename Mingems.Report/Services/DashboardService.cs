@@ -24,8 +24,9 @@ namespace Mingems.Report.Services
             var supplierCount = await context.SPDashboard.FromSqlRaw("exec SupplierCount").ToListAsync();
             var salesCount = await context.SPDashboard.FromSqlRaw("exec SalesCount").ToListAsync();
             var pendingSalesCount = await context.SPDashboard.FromSqlRaw("exec PendingSalesCount").ToListAsync();
-
-            var topInvestors = await context.TopInvestors.FromSqlRaw("exec TopInvestors").ToListAsync(); 
+           
+            var topInvestors = await context.TopInvestors.FromSqlRaw("exec TopInvestors").ToListAsync();
+            var topCustomers = await context.TopCustomers.FromSqlRaw("exec TopCustomers").ToListAsync();
 
 
             return new DashboardModel()
@@ -37,7 +38,8 @@ namespace Mingems.Report.Services
                 TotalSupplier = supplierCount.Count > 0 ? supplierCount[0].Count : 0,
                 TotalSales = salesCount.Count > 0 ? salesCount[0].Count : 0,
                 TotalPendingSales = pendingSalesCount.Count > 0 ? pendingSalesCount[0].Count : 0,
-                Investors = topInvestors
+                Investors = topInvestors,
+                Customers = topCustomers
             };
         }
     }

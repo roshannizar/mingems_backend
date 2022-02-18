@@ -12,6 +12,7 @@ namespace Mingems.Core.SPModels
         public int TotalSales { get; set; }
         public int TotalPendingSales { get; set; }
         public List<TopInvestors> Investors { get; set; }
+        public List<TopCustomers> Customers { get; set; }
     }
 
     public class TopInvestors
@@ -20,5 +21,12 @@ namespace Mingems.Core.SPModels
         public string LastName { get; set; }
         public decimal Fund { get; set; }
         public decimal Balance { get; set; }
+    }
+
+    public class TopCustomers
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public decimal TotalAmount { get; set; }
     }
 }
