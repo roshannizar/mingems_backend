@@ -24,7 +24,7 @@ namespace Mingems.Email.Service
             var from = new EmailAddress(configuration.SenderEmail, configuration.SenderName);
             var to = new List<EmailAddress>();
             to.Add(new EmailAddress(senderMail));
-            to.Add(new EmailAddress(configuration.SenderEmail));
+            to.Add(new EmailAddress("minshaf@mingems.co.uk"));
             var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, subject, finalContent, htmlContent);
             await client.SendEmailAsync(msg);
         }
