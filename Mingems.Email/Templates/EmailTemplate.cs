@@ -187,6 +187,10 @@ namespace Mingems.Email.Templates
                         <td> {1}</td>
                     </tr>
                     <tr>
+                        <td colspan='3' class='text-right'>VAT(£) </td>
+                        <td> {3}</td>
+                    </tr>
+                    <tr>
                         <td colspan='3' class='text-right'>Grand Total(£) </td>
                         <td> {2}</td>
                     </tr>
@@ -204,7 +208,7 @@ namespace Mingems.Email.Templates
 
 </body>
 </html>
-", Math.Round(order.TotalAmount, 2), order.Discount, Math.Round(order.TotalAmount - order.Discount, 2));
+", Math.Round(order.TotalAmount, 2), order.Discount, Math.Round(order.TotalAmount - order.Discount + order.VAT, 2), Math.Round(order.VAT, 2));
 
             return sb.ToString();
         }

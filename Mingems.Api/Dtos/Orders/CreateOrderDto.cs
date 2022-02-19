@@ -12,5 +12,6 @@ namespace Mingems.Api.Dtos.Orders
         public OrderStatus OrderStatus { get; set; }
         public PaymentType PaymentType { get; set; }
         public decimal Discount { get; set; }
+        public decimal VAT { get; set; }
     }
 }
