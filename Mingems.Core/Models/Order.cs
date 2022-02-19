@@ -21,6 +21,7 @@ namespace Mingems.Core.Models
         public PaymentType PaymentType { get; set; }
         public decimal Discount { get; set; }
         public decimal TotalAmount { get; set; }
+        public decimal VAT { get; set; }
 
         #region Private Methods
         private List<OrderLine> CreateOrUpdateOrderLine(string user, List<OrderLine> orderLine)
@@ -60,6 +61,7 @@ namespace Mingems.Core.Models
             OrderStatus = order.OrderStatus;
             PaymentType = order.PaymentType;
             Discount = order.Discount;
+            VAT = order.VAT;
             TotalAmount = CalculateTotal();
 
             RecordState = RecordState.Active;
@@ -81,6 +83,7 @@ namespace Mingems.Core.Models
             PaymentType = order.PaymentType;
             Discount = order.Discount;
             TotalAmount = CalculateTotal();
+            VAT = order.VAT;
 
             RecordState = RecordState.Active;
 
